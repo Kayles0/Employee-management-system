@@ -19,6 +19,6 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "image")
 public class Image extends SoftDeletableEntity{
     @OneToOne
-    @JoinColumn(name = "person", nullable = false)
+    @JoinColumn(name = "person")
     private Person person;
 }

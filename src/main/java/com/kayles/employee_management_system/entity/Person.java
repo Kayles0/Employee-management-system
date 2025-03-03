@@ -7,6 +7,8 @@ import com.kayles.employee_management_system.enums.StatusEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -15,26 +17,26 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "person")
 public class Person extends SoftDeletableEntity{
-    @Column(name = "login")
+    @Column(name = "login", nullable = false, unique = true)
     private String login;
 
-    @Column(name = "firstname")
+    @Column(name = "firstname", nullable = false)
     private String firstname;
 
-    @Column(name = "lastname")
+    @Column(name = "lastname", nullable = false)
     private String lastname;
 
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)
     private GenderEnum gender;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    @Column(name = "role")
+    @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
@@ -45,6 +47,9 @@ public class Person extends SoftDeletableEntity{
     @Column(name = "department")
     @Enumerated(EnumType.STRING)
     private DepartmentEnum department;
+
+    @ManyToMany(mappedBy = "members")
+    private List<Group> groupList;
 
     @OneToOne(mappedBy = "image", cascade = CascadeType.ALL, orphanRemoval = true)
     private Image image;
