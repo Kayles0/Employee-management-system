@@ -4,7 +4,6 @@ import com.kayles.employee_management_system.Service.PersonService;
 import com.kayles.employee_management_system.dto.PersonDto;
 import com.kayles.employee_management_system.entity.Person;
 import com.kayles.employee_management_system.mapper.PersonMapper;
-import com.kayles.employee_management_system.repository.EmployeeRepository;
 import com.kayles.employee_management_system.repository.PersonRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +27,11 @@ public class PersonServiceImpl implements PersonService {
         Person person = personRepository.findById(id).orElseThrow(()
                 -> new EntityNotFoundException("User not found"));
         return personMapper.toDto(person);
+    }
+
+    @Override
+    public void update(PersonDto personDto) {
+        //TODO
     }
 
     @Override

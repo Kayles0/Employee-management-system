@@ -5,6 +5,8 @@ import com.kayles.employee_management_system.dto.PersonDto;
 public interface PersonService {
     PersonDto read(Long id);
 
+    void update(PersonDto personDto);
+
     void delete(Long id);
 
     void delete();
