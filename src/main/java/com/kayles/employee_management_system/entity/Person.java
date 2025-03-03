@@ -20,11 +20,11 @@ public class Person extends SoftDeletableEntity{
     @Column(name = "login", nullable = false, unique = true)
     private String login;
 
-    @Column(name = "firstname", nullable = false)
-    private String firstname;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-    @Column(name = "lastname", nullable = false)
-    private String lastname;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)
