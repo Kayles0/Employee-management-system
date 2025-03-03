@@ -1,9 +1,6 @@
 package com.kayles.employee_management_system.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +15,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @Table(name = "image")
 public class Image extends SoftDeletableEntity{
-    @OneToOne
-    @JoinColumn(name = "person")
-    private Person person;
+    @Lob
+    @Column(name = "image", columnDefinition = "BLOB")
+    private byte[] image;
 }

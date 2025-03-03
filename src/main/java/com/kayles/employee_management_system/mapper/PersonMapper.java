@@ -4,7 +4,7 @@ import com.kayles.employee_management_system.dto.PersonDto;
 import com.kayles.employee_management_system.entity.Person;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface PersonMapper {
     Person toEntity(PersonDto dto);
 

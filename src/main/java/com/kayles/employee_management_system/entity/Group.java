@@ -1,16 +1,14 @@
 package com.kayles.employee_management_system.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Group extends AbstractEntity {
@@ -20,8 +18,8 @@ public class Group extends AbstractEntity {
     @ManyToMany
     @JoinTable(
             name = "person_group",
-            joinColumns = @JoinColumn(name = "group_id"),
-            inverseJoinColumns = @JoinColumn(name = "person_id")
+            joinColumns = @JoinColumn(name = "group_name", referencedColumnName = "name"),
+            inverseJoinColumns = @JoinColumn(name = "person_login", referencedColumnName = "login")
     )
     private List<Person> persons;
 }

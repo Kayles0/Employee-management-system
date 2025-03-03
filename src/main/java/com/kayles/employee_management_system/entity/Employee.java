@@ -8,8 +8,8 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
 @ToString
+@EqualsAndHashCode(callSuper = false)
 public class Employee extends Person {
     @ManyToOne
     @JoinColumn(name = "manager")

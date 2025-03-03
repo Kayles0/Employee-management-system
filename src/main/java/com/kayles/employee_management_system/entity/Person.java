@@ -6,6 +6,7 @@ import com.kayles.employee_management_system.enums.RoleEnum;
 import com.kayles.employee_management_system.enums.StatusEnum;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "person")
@@ -48,9 +50,13 @@ public class Person extends SoftDeletableEntity{
     @Enumerated(EnumType.STRING)
     private DepartmentEnum department;
 
-    @ManyToMany(mappedBy = "members")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "groups",
+        joinColumns = @JoinColumn(name = "person_login", referencedColumnName = "login"),
+        inverseJoinColumns = @JoinColumn(name = "group_name", referencedColumnName = "name"))
     private List<Group> groupList;
 
-    @OneToOne(mappedBy = "image", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "image", referencedColumnName = "id")
     private Image image;
 }

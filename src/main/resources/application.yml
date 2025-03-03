@@ -1,3 +1,12 @@
 spring:
   datasource:
-    url:
+    url: jdbc:postgresql://localhost:5432/Employees-management-system
+    username: Admin
+    driver-class-name: org.postgresql.Driver
+    password: 1122
+  jpa:
+    show-sql: true
+  liquibase:
+    enabled: false
+server:
+  port: 1717
