@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="insert-values" author="Kayles">
+        <sql>
+            INSERT INTO image(image, is_deleted)
+            VALUES
+                (null, false);
+        </sql>
+
+        <sql>
+            INSERT INTO "group"(name, is_deleted)
+            VALUES
+                ('group1', false),
+                ('group2', false);
+        </sql>
+
+        <sql>INSERT INTO person(login, first_name, last_name, gender, email,
+                   password, role, status, department, image_id, is_deleted)
+             VALUES
+                 ('user1', 'John', 'Doe', 'MAN', 'john.doe@example.com', 'password123', 'ROLE_ADMIN', 'ACTIVE', 'SOFTWARE_DEVELOPMENT_DEPARTMENT', 1, false),
+                 ('user2', 'Jane', 'Smith', 'WOMAN', 'jane.smith@example.com', 'password456', 'ROLE_USER', 'ON_VACATION', 'SUPPORT_AND_OPERATIONS_DEPARTMENT', 1, false),
+                 ('user3', 'Alex', 'Johnson', 'MAN', 'alex.johnson@example.com', 'password789', 'ROLE_ADMIN', 'ACTIVE', 'MOBILE_DEVELOPMENT_DEPARTMENT', 1, false),
+                 ('user4', 'Emily', 'Davis', 'WOMAN', 'emily.davis@example.com', 'password101', 'ROLE_USER', 'DISMISSED', 'SUPPORT_AND_OPERATIONS_DEPARTMENT', 1, false),
+                 ('user5', 'Michael', 'Brown', 'MAN', 'michael.brown@example.com', 'password102', 'ROLE_USER', 'ON_PROBATION', 'MOBILE_DEVELOPMENT_DEPARTMENT', 1, false);
+        </sql>
+        <sql>
+            INSERT INTO manager(person_id)
+            VALUES
+                (1);
+        </sql>
+
+        <sql>
+            INSERT INTO employee(person_id)
+            VALUES
+                (2),
+                (3),
+                (4),
+                (5);
+        </sql>
+
+        <sql>
+            INSERT INTO group_person(group_id, person_id)
+            VALUES
+                (1, 1),
+                (1, 3),
+                (1, 5),
+                (2, 2),
+                (2, 4);
+        </sql>
+        <sql>
+            INSERT INTO manager_employee(manager_id, employee_id)
+            VALUES
+                (1, 3),
+                (1, 5);
+        </sql>
+
+    </changeSet>
+</databaseChangeLog>

@@ -51,12 +51,12 @@ public class Person extends SoftDeletableEntity{
     private DepartmentEnum department;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "groups",
+    @JoinTable(name = "person_groups",
         joinColumns = @JoinColumn(name = "person_login", referencedColumnName = "login"),
         inverseJoinColumns = @JoinColumn(name = "group_name", referencedColumnName = "name"))
     private List<Group> groupList;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "image", referencedColumnName = "id")
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
     private Image image;
 }

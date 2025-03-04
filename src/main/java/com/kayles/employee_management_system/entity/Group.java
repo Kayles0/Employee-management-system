@@ -11,7 +11,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Group extends AbstractEntity {
+@Table(name = "group")
+public class Group extends SoftDeletableEntity {
     @Column(name = "name", nullable = false)
     private String name;
 

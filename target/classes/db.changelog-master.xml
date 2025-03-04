@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="db/changelog/initial/001.creare-person-table.xml" relativeToChangelogFile="true"/>
+    <include file="db/changelog/initial/002.create-group-table.xml" relativeToChangelogFile="true"/>
+    <include file="db/changelog/initial/003.create-employee-table.xml" relativeToChangelogFile="true"/>
+    <include file="db/changelog/initial/004.create-manager-table.xml" relativeToChangelogFile="true"/>
+    <include file="db/changelog/initial/005.create-image-table.xml" relativeToChangelogFile="true"/>
+    <include file="db/changelog/initial/006.create-manager-employee-table.xml" relativeToChangelogFile="true"/>
+    <include file="db/changelog/initial/007.create-group-person-table.xml" relativeToChangelogFile="true"/>
+    <include file="db/changelog/initial/008.add-foreign-key.xml" relativeToChangelogFile="true"/>
+    <include file="db/changelog/initial/009.insert-values.xml" relativeToChangelogFile="true"/>
+</databaseChangeLog>

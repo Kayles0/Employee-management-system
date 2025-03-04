@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-manager-employee-table" author="admin">
+        <createTable tableName="manager_employee">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" unique="true" nullable="true"/>
+            </column>
+            <column name="manager_id" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+            <column name="employee_id" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="add-foreign-key" author="admin">
+        <addForeignKeyConstraint baseTableName="person"
+                                 baseColumnNames="image_id"
+                                 constraintName="fk_person_image"
+                                 referencedTableName="image"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="employee" baseColumnNames="id"
+                                 constraintName="fk_employee_person"
+                                 referencedTableName="person"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="manager" baseColumnNames="id"
+                                 constraintName="fk_manager_person"
+                                 referencedTableName="person"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="manager_employee" baseColumnNames="manager_id"
+                                 constraintName="fk_manager_employee_manager"
+                                 referencedTableName="manager"
+                                 referencedColumnNames="person_id"/>
+        <addForeignKeyConstraint baseTableName="manager_employee" baseColumnNames="employee_id"
+                                 constraintName="fk_manager_employee_employee"
+                                 referencedTableName="employee"
+                                 referencedColumnNames="person_id"/>
+        <addForeignKeyConstraint baseTableName="group_person" baseColumnNames="group_id" constraintName="fk_group_person_group"
+                                 referencedTableName="group"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

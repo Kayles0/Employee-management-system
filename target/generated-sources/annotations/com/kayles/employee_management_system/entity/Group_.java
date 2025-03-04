@@ -8,7 +8,7 @@ import jakarta.persistence.metamodel.StaticMetamodel;
 
 @StaticMetamodel(Group.class)
 @Generated("org.hibernate.processor.HibernateProcessor")
-public abstract class Group_ extends com.kayles.employee_management_system.entity.AbstractEntity_ {
+public abstract class Group_ extends com.kayles.employee_management_system.entity.SoftDeletableEntity_ {
 
 	public static final String PERSONS = "persons";
 	public static final String NAME = "name";

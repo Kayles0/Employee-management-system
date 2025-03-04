@@ -11,7 +11,7 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 public class Employee extends Person {
-    @ManyToOne
-    @JoinColumn(name = "manager")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id", referencedColumnName = "id")
     private Manager manager;
 }
