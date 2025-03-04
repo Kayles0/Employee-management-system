@@ -3,9 +3,9 @@ package com.kayles.employee_management_system.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kayles.employee_management_system.entity.Group;
 import com.kayles.employee_management_system.entity.Image;
+import com.kayles.employee_management_system.entity.Role;
 import com.kayles.employee_management_system.enums.DepartmentEnum;
 import com.kayles.employee_management_system.enums.GenderEnum;
-import com.kayles.employee_management_system.enums.RoleEnum;
 import com.kayles.employee_management_system.enums.StatusEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PersonDto {
     @JsonProperty("id")
-    private int id;
+    private Long id;
 
     @NotBlank
     @NotNull
@@ -48,7 +48,7 @@ public class PersonDto {
     @NotNull
     @NotBlank
     @JsonProperty("role")
-    private RoleEnum role;
+    private Role role;
 
     @NotNull
     @NotBlank

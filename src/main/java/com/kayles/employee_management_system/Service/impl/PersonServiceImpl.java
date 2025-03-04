@@ -1,7 +1,9 @@
 package com.kayles.employee_management_system.Service.impl;
 
 import com.kayles.employee_management_system.Service.PersonService;
+import com.kayles.employee_management_system.Service.security.JwtAuthorizationService;
 import com.kayles.employee_management_system.dto.PersonDto;
+import com.kayles.employee_management_system.dto.security.JwtPerson;
 import com.kayles.employee_management_system.entity.Person;
 import com.kayles.employee_management_system.mapper.PersonMapper;
 import com.kayles.employee_management_system.repository.PersonRepository;
@@ -20,6 +22,7 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
+    private final JwtAuthorizationService jwtAuthorizationService;
 
     @Override
     public PersonDto read(Long id) {
@@ -30,20 +33,33 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void update(PersonDto personDto) {
-        //TODO
+    public void update(PersonDto dto) {
+        logger.info("Update person id: " + dto.getId());
+        JwtPerson jwtPerson = jwtAuthorizationService.extractJwtPerson();
+        dto.setId(jwtPerson.getId());
+        Person newPerson = personMapper.toEntity(dto);
+        Person exPerson = personRepository.findById(jwtPerson.getId())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        personMapper.update(exPerson, newPerson);
+        personRepository.save(exPerson);
     }
 
     @Override
     public void delete(Long id) {
         logger.info("Delete person id: " + id);
-        Person person = personRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
-        //TODO
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        person.setIsDeleted(true);
+        personRepository.save(person);
     }
 
     @Override
     public void delete() {
-        //TODO
+        JwtPerson jwtPerson = jwtAuthorizationService.extractJwtPerson();
+        Person person = personRepository.findById(jwtPerson.getId())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        person.setIsDeleted(true);
+        personRepository.save(person);
     }
 
     @Override
@@ -53,6 +69,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void updatePersonRole(Long id, String role) {
-        //TODO
+        Person person = personRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
+
     }
 }

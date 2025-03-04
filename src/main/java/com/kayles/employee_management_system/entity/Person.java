@@ -2,11 +2,11 @@ package com.kayles.employee_management_system.entity;
 
 import com.kayles.employee_management_system.enums.DepartmentEnum;
 import com.kayles.employee_management_system.enums.GenderEnum;
-import com.kayles.employee_management_system.enums.RoleEnum;
 import com.kayles.employee_management_system.enums.StatusEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.List;
 
@@ -38,9 +38,9 @@ public class Person extends SoftDeletableEntity{
     @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    @Column(name = "role", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private RoleEnum role;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role", referencedColumnName = "name")
+    private Role role;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -59,4 +59,8 @@ public class Person extends SoftDeletableEntity{
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id", referencedColumnName = "id")
     private Image image;
+
+    public List<SimpleGrantedAuthority> getAuthorities() {
+        return this.role.getAuthorities();
+    }
 }

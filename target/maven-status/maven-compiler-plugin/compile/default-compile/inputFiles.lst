@@ -2,6 +2,7 @@ D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_manage
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\controller\impl\PersonControllerImpl.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\controller\PersonController.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\dto\PersonDto.java
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\dto\security\JwtPerson.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\EmployeeManagementSystemApplication.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\entity\AbstractEntity.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\entity\Employee.java
@@ -9,6 +10,7 @@ D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_manage
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\entity\Image.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\entity\Manager.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\entity\Person.java
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\entity\Role.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\entity\SoftDeletableEntity.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\enums\DepartmentEnum.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\enums\GenderEnum.java
@@ -17,6 +19,7 @@ D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_manage
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\exception\BaseException.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\exception\EmptyException.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\exception\EntityNotFoundException.java
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\exception\JwtParsingException.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\exception\LoginDuplicateException.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\mapper\PersonMapper.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\repository\EmployeeRepository.java
@@ -27,4 +30,5 @@ D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_manage
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\security\JwtAuthenticationFilter.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\impl\PersonServiceImpl.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\PersonService.java
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\security\JwtAuthorizationService.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\security\JwtService.java
