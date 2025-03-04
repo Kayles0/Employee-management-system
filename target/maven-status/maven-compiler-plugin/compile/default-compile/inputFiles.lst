@@ -1,3 +1,4 @@
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\config\SecurityConfig.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\controller\impl\PersonControllerImpl.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\controller\PersonController.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\dto\PersonDto.java
@@ -23,5 +24,7 @@ D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_manage
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\repository\ImageRepository.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\repository\ManagerRepository.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\repository\PersonRepository.java
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\security\JwtAuthenticationFilter.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\impl\PersonServiceImpl.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\PersonService.java
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\security\JwtService.java

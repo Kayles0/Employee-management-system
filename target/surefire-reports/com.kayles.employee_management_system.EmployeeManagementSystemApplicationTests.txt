@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.kayles.employee_management_system.EmployeeManagementSystemApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.723 s -- in com.kayles.employee_management_system.EmployeeManagementSystemApplicationTests
