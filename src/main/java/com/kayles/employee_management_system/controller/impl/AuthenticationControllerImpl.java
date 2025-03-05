@@ -21,6 +21,7 @@ public class AuthenticationControllerImpl implements AuthenticationController {
     @Override
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody JwtPerson request) {
+
         return ResponseEntity.ok(authenticationService.register(request));
     }
 
