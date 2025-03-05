@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-person-role-table" author="admin">
+        <createTable tableName="person_role">
+            <column name="id" type="bigserial"/>
+            <column name="person_id" type="bigserial"/>
+            <column name="role_id" type="bigserial"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="insert-values" author="Kayles">
+        <sql>
+            INSERT INTO role (name)
+            VALUES ('ROLE_USER'),
+                   ('ROLE_ADMIN');
+        </sql>
+
+        <sql>
+            INSERT INTO image(image, is_deleted)
+            VALUES
+                (null, false);
+        </sql>
+
+        <sql>
+            INSERT INTO groups(name, is_deleted)
+            VALUES
+                ('group1', false),
+                ('group2', false);
+        </sql>
+
+        <sql>INSERT INTO person(login, first_name, last_name, gender, email,
+                   password, status, department, is_deleted)
+             VALUES
+--                  "password" : "password"
+                 ('user1', 'John', 'Doe', 'MAN', 'john.doe@example.com', '$2a$10$RZBCdVqYeiCBZGkOfLsa6edHEW0/wlRIxGZhYtQlMUh5LJBL3cRxa', 'ACTIVE', 'SOFTWARE_DEVELOPMENT_DEPARTMENT', false),
+                 ('user2', 'Jane', 'Smith', 'WOMAN', 'jane.smith@example.com', '$2a$10$RZBCdVqYeiCBZGkOfLsa6edHEW0/wlRIxGZhYtQlMUh5LJBL3cRxa', 'ON_VACATION', 'SUPPORT_AND_OPERATIONS_DEPARTMENT', false),
+                 ('user3', 'Alex', 'Johnson', 'MAN', 'alex.johnson@example.com', '$2a$10$RZBCdVqYeiCBZGkOfLsa6edHEW0/wlRIxGZhYtQlMUh5LJBL3cRxa', 'ACTIVE', 'MOBILE_DEVELOPMENT_DEPARTMENT', false),
+                 ('user4', 'Emily', 'Davis', 'WOMAN', 'emily.davis@example.com', '$2a$10$RZBCdVqYeiCBZGkOfLsa6edHEW0/wlRIxGZhYtQlMUh5LJBL3cRxa', 'DISMISSED', 'SUPPORT_AND_OPERATIONS_DEPARTMENT', false),
+                 ('user5', 'Michael', 'Brown', 'MAN', 'michael.brown@example.com', '$2a$10$RZBCdVqYeiCBZGkOfLsa6edHEW0/wlRIxGZhYtQlMUh5LJBL3cRxa', 'ON_PROBATION', 'MOBILE_DEVELOPMENT_DEPARTMENT', false);
+        </sql>
+
+        <sql>
+            INSERT INTO person_role (person_id, role_id)
+            VALUES (1, 1),
+                   (2, 1),
+                   (3, 1),
+                   (4, 1),
+                   (5, 2);
+        </sql>
+
+        <sql>
+            INSERT INTO manager(person_id)
+            VALUES
+                (1);
+        </sql>
+
+        <sql>
+            INSERT INTO employee(person_id)
+            VALUES
+                (2),
+                (3),
+                (4),
+                (5);
+        </sql>
+
+        <sql>
+            INSERT INTO person_group(person_id, group_id)
+            VALUES
+                (1, 1),
+                (2, 2),
+                (3, 2),
+                (4, 1),
+                (5, 2);
+        </sql>
+        <sql>
+            INSERT INTO manager_employee(manager_id, employee_id)
+            VALUES
+                (1, 3),
+                (1, 5);
+        </sql>
+        <sql>
+            INSERT INTO person_image(person_id, image_id)
+            VALUES
+                (1, 1),
+                (2, 1),
+                (3, 1),
+                (4, 1),
+                (5, 1);
+        </sql>
+
+    </changeSet>
+</databaseChangeLog>

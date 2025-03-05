@@ -18,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "person")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person extends SoftDeletableEntity{
     @Column(name = "login", nullable = false, unique = true)
     private String login;
@@ -38,8 +39,10 @@ public class Person extends SoftDeletableEntity{
     @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role", referencedColumnName = "name")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = "person_role", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Role role;
 
     @Column(name = "status")
@@ -50,14 +53,16 @@ public class Person extends SoftDeletableEntity{
     @Enumerated(EnumType.STRING)
     private DepartmentEnum department;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "person_groups",
-        joinColumns = @JoinColumn(name = "person_login", referencedColumnName = "login"),
-        inverseJoinColumns = @JoinColumn(name = "group_name", referencedColumnName = "name"))
-    private List<Group> groupList;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "person_group", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private List<Groups> groupList;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    @JoinTable(name = "person_image", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "image_id"))
     private Image image;
 
     public List<SimpleGrantedAuthority> getAuthorities() {

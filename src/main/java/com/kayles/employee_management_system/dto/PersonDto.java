@@ -1,7 +1,7 @@
 package com.kayles.employee_management_system.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.kayles.employee_management_system.entity.Group;
+import com.kayles.employee_management_system.entity.Groups;
 import com.kayles.employee_management_system.entity.Image;
 import com.kayles.employee_management_system.entity.Role;
 import com.kayles.employee_management_system.enums.DepartmentEnum;
@@ -68,6 +68,6 @@ public class PersonDto {
     @NotNull
     @NotBlank
     @JsonProperty("groupList")
-    private List<Group> groupList;
+    private List<Groups> groupList;
 
 }

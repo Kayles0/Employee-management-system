@@ -1,6 +1,7 @@
 package com.kayles.employee_management_system.Service;
 
 import com.kayles.employee_management_system.dto.PersonDto;
+import com.kayles.employee_management_system.entity.Person;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +14,7 @@ public interface PersonService {
 
     void delete();
 
-    PersonDto findByLogin(String login);
+    Person findByLogin(String login);
 
     void updatePersonRole(Long id, String role);
 }

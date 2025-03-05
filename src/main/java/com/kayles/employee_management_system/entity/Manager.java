@@ -14,7 +14,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 public class Manager extends Person {
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "manager_employees", joinColumns = @JoinColumn(name = "manager_id"),
+    @JoinTable(name = "manager_employee", joinColumns = @JoinColumn(name = "manager_id"),
             inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private List<Employee> employees;
 }

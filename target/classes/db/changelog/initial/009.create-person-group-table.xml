@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-person-group-table" author="admin">
+        <createTable tableName="person_group">
+            <column name="id" type="bigserial">
+                <constraints unique="true" primaryKey="true" nullable="true"/>
+            </column>
+            <column name="group_id" type="bigserial"/>
+            <column name="person_id" type="bigserial"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -59,7 +59,7 @@ public abstract class Person_ extends com.kayles.employee_management_system.enti
 	/**
 	 * @see com.kayles.employee_management_system.entity.Person#groupList
 	 **/
-	public static volatile ListAttribute<Person, Group> groupList;
+	public static volatile ListAttribute<Person, Groups> groupList;
 	
 	/**
 	 * @see com.kayles.employee_management_system.entity.Person#login

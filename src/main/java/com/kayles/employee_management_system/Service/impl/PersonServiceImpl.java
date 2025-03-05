@@ -63,8 +63,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDto findByLogin(String login) {
-        return personMapper.toDto(personRepository.findByLogin(login).orElseThrow(() -> new EntityNotFoundException("User not found")));
+    public Person findByLogin(String login) {
+        return personRepository.findByLogin(login).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
     @Override

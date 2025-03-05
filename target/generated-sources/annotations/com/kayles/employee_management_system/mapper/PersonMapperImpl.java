@@ -1,7 +1,7 @@
 package com.kayles.employee_management_system.mapper;
 
 import com.kayles.employee_management_system.dto.PersonDto;
-import com.kayles.employee_management_system.entity.Group;
+import com.kayles.employee_management_system.entity.Groups;
 import com.kayles.employee_management_system.entity.Person;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-05T01:44:59+0300",
+    date = "2025-03-05T15:56:41+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23 (Oracle Corporation)"
 )
 @Component
@@ -33,9 +33,9 @@ public class PersonMapperImpl implements PersonMapper {
         person.role( dto.getRole() );
         person.status( dto.getStatus() );
         person.department( dto.getDepartment() );
-        List<Group> list = dto.getGroupList();
+        List<Groups> list = dto.getGroupList();
         if ( list != null ) {
-            person.groupList( new ArrayList<Group>( list ) );
+            person.groupList( new ArrayList<Groups>( list ) );
         }
         person.image( dto.getImage() );
 
@@ -60,9 +60,9 @@ public class PersonMapperImpl implements PersonMapper {
         personDto.status( entity.getStatus() );
         personDto.department( entity.getDepartment() );
         personDto.image( entity.getImage() );
-        List<Group> list = entity.getGroupList();
+        List<Groups> list = entity.getGroupList();
         if ( list != null ) {
-            personDto.groupList( new ArrayList<Group>( list ) );
+            personDto.groupList( new ArrayList<Groups>( list ) );
         }
 
         return personDto.build();
@@ -99,16 +99,16 @@ public class PersonMapperImpl implements PersonMapper {
             exPerson.setDepartment( newPerson.getDepartment() );
         }
         if ( exPerson.getGroupList() != null ) {
-            List<Group> list = newPerson.getGroupList();
+            List<Groups> list = newPerson.getGroupList();
             if ( list != null ) {
                 exPerson.getGroupList().clear();
                 exPerson.getGroupList().addAll( list );
             }
         }
         else {
-            List<Group> list = newPerson.getGroupList();
+            List<Groups> list = newPerson.getGroupList();
             if ( list != null ) {
-                exPerson.setGroupList( new ArrayList<Group>( list ) );
+                exPerson.setGroupList( new ArrayList<Groups>( list ) );
             }
         }
         if ( newPerson.getImage() != null ) {
