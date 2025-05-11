@@ -18,8 +18,15 @@ public class PersonControllerImpl implements PersonController {
     private final PersonService personService;
 
     @Override
+    @GetMapping("")
+    public ResponseEntity<PersonDto[]> personList(){
+        logger.info("Get person list");
+        return ResponseEntity.ok(personService.getAllPersons());
+    }
+
+    @Override
     @GetMapping("{id}")
-    public ResponseEntity<PersonDto> read(@PathVariable Long id) {
+    public ResponseEntity<PersonDto> readById(@PathVariable Long id) {
         logger.info("Read person with id {}", id);
         return ResponseEntity.ok(personService.read(id));
     }
@@ -33,6 +40,7 @@ public class PersonControllerImpl implements PersonController {
     }
 
     @Override
+    @DeleteMapping
     public ResponseEntity<Void> delete() {
         logger.info("Delete");
         personService.delete();

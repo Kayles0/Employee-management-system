@@ -66,6 +66,6 @@ public class Person extends SoftDeletableEntity{
     private Image image;
 
     public List<SimpleGrantedAuthority> getAuthorities() {
-        return this.role.getAuthorities();
+        return this.role.getAuthorities().stream().toList();
     }
 }

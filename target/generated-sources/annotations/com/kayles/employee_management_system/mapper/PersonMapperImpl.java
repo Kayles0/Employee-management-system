@@ -1,8 +1,11 @@
 package com.kayles.employee_management_system.mapper;
 
 import com.kayles.employee_management_system.dto.PersonDto;
+import com.kayles.employee_management_system.dto.RoleDto;
 import com.kayles.employee_management_system.entity.Groups;
+import com.kayles.employee_management_system.entity.Image;
 import com.kayles.employee_management_system.entity.Person;
+import com.kayles.employee_management_system.entity.Role;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -10,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-05T15:56:41+0300",
+    date = "2025-05-10T23:57:13+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23 (Oracle Corporation)"
 )
 @Component
@@ -30,14 +33,9 @@ public class PersonMapperImpl implements PersonMapper {
         person.lastName( dto.getLastName() );
         person.gender( dto.getGender() );
         person.email( dto.getEmail() );
-        person.role( dto.getRole() );
+        person.role( roleDtoToRole( dto.getRole() ) );
         person.status( dto.getStatus() );
         person.department( dto.getDepartment() );
-        List<Groups> list = dto.getGroupList();
-        if ( list != null ) {
-            person.groupList( new ArrayList<Groups>( list ) );
-        }
-        person.image( dto.getImage() );
 
         return person.build();
     }
@@ -50,20 +48,16 @@ public class PersonMapperImpl implements PersonMapper {
 
         PersonDto.PersonDtoBuilder personDto = PersonDto.builder();
 
+        personDto.imageId( entityImageId( entity ) );
         personDto.id( entity.getId() );
         personDto.login( entity.getLogin() );
         personDto.gender( entity.getGender() );
         personDto.firstName( entity.getFirstName() );
         personDto.lastName( entity.getLastName() );
         personDto.email( entity.getEmail() );
-        personDto.role( entity.getRole() );
+        personDto.role( roleToRoleDto( entity.getRole() ) );
         personDto.status( entity.getStatus() );
         personDto.department( entity.getDepartment() );
-        personDto.image( entity.getImage() );
-        List<Groups> list = entity.getGroupList();
-        if ( list != null ) {
-            personDto.groupList( new ArrayList<Groups>( list ) );
-        }
 
         return personDto.build();
     }
@@ -114,5 +108,46 @@ public class PersonMapperImpl implements PersonMapper {
         if ( newPerson.getImage() != null ) {
             exPerson.setImage( newPerson.getImage() );
         }
+    }
+
+    protected Role roleDtoToRole(RoleDto roleDto) {
+        if ( roleDto == null ) {
+            return null;
+        }
+
+        Role.RoleBuilder<?, ?> role = Role.builder();
+
+        role.id( roleDto.getId() );
+        role.name( roleDto.getName() );
+
+        return role.build();
+    }
+
+    private Long entityImageId(Person person) {
+        if ( person == null ) {
+            return null;
+        }
+        Image image = person.getImage();
+        if ( image == null ) {
+            return null;
+        }
+        Long id = image.getId();
+        if ( id == null ) {
+            return null;
+        }
+        return id;
+    }
+
+    protected RoleDto roleToRoleDto(Role role) {
+        if ( role == null ) {
+            return null;
+        }
+
+        RoleDto.RoleDtoBuilder roleDto = RoleDto.builder();
+
+        roleDto.id( role.getId() );
+        roleDto.name( role.getName() );
+
+        return roleDto.build();
     }
 }

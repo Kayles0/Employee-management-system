@@ -7,8 +7,11 @@ import org.springframework.http.ResponseEntity;
 
 @Tag(name = "Контроллер пользователя")
 public interface PersonController {
+    @Operation(summary = "Получение всех пользователей")
+    ResponseEntity<PersonDto[]> personList();
+
     @Operation(summary = "Получение пользователя")
-    ResponseEntity<PersonDto> read(Long id);
+    ResponseEntity<PersonDto> readById(Long id);
 
     @Operation(summary = "Обновление пользователя")
     ResponseEntity<Void> update(PersonDto personDto);

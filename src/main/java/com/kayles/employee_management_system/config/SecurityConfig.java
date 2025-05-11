@@ -24,13 +24,16 @@ import java.util.List;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    private static final String ADMIN_ENDPOINT = "/admin/**";
+    private static final String[] ADMIN_ENDPOINT =  {
+            "/admin/**"
+    };
     private static final String[] AUTH_WHITELIST = {
             "/auth/**",
             "/swagger-resources/**",
             "/swagger-ui/**",
             "/v3/api-docs/**",
-            "/webjars/**"
+            "/webjars/**",
+            "/person/**"
     };
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
@@ -40,28 +43,17 @@ public class SecurityConfig {
     }
 
     @Bean
-    CorsConfigurationSource corsConfigurationSource(){
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("*"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedOrigins(List.of("*"));
-        configuration.setAllowCredentials(true);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
-
-    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-//                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((auth) -> {
                     auth
                             .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                             .requestMatchers(AUTH_WHITELIST).permitAll()
                             .requestMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
-                            .anyRequest().authenticated();
+//                            .anyRequest().authenticated();
+                            .anyRequest().permitAll(); //УБРАТЬ!!!!!!!
                 })
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
@@ -70,5 +62,18 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }

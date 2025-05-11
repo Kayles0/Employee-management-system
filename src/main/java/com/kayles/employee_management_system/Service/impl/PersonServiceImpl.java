@@ -5,14 +5,16 @@ import com.kayles.employee_management_system.Service.security.JwtAuthorizationSe
 import com.kayles.employee_management_system.dto.PersonDto;
 import com.kayles.employee_management_system.dto.security.JwtPerson;
 import com.kayles.employee_management_system.entity.Person;
+import com.kayles.employee_management_system.exception.EntityNotFoundException;
 import com.kayles.employee_management_system.mapper.PersonMapper;
 import com.kayles.employee_management_system.repository.PersonRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -26,15 +28,25 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonDto read(Long id) {
-        logger.info("Read person id: " + id);
-        Person person = personRepository.findById(id).orElseThrow(()
-                -> new EntityNotFoundException("User not found"));
+        logger.info("Read person id: {}", id);
+        Person person = personRepository.findPersonByIdAndIsNotDeleted(id).orElseThrow(()
+                -> new EntityNotFoundException("Person not found"));
+        if (person.getIsDeleted()) {
+            throw new EntityNotFoundException("Person is deleted");
+        }
         return personMapper.toDto(person);
     }
 
     @Override
+    public PersonDto[] getAllPersons() {
+        logger.info("Read all persons");
+        List<Person> persons = personRepository.findAllNotDeleted();
+        return persons.stream().map(personMapper::toDto).toArray(PersonDto[]::new);
+    }
+
+    @Override
     public void update(PersonDto dto) {
-        logger.info("Update person id: " + dto.getId());
+        logger.info("Update person id: {}", dto.getId());
         JwtPerson jwtPerson = jwtAuthorizationService.extractJwtPerson();
         dto.setId(jwtPerson.getId());
         Person newPerson = personMapper.toEntity(dto);
@@ -46,7 +58,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void delete(Long id) {
-        logger.info("Delete person id: " + id);
+        logger.info("Delete person id: {}", id);
         Person person = personRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
         person.setIsDeleted(true);

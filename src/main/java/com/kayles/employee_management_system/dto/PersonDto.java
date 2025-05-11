@@ -1,5 +1,6 @@
 package com.kayles.employee_management_system.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kayles.employee_management_system.entity.Groups;
 import com.kayles.employee_management_system.entity.Image;
@@ -7,6 +8,7 @@ import com.kayles.employee_management_system.entity.Role;
 import com.kayles.employee_management_system.enums.DepartmentEnum;
 import com.kayles.employee_management_system.enums.GenderEnum;
 import com.kayles.employee_management_system.enums.StatusEnum;
+import com.kayles.employee_management_system.mapper.RoleMapper;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -48,7 +50,7 @@ public class PersonDto {
     @NotNull
     @NotBlank
     @JsonProperty("role")
-    private Role role;
+    private RoleDto role;
 
     @NotNull
     @NotBlank
@@ -61,13 +63,10 @@ public class PersonDto {
     private DepartmentEnum department;
 
     @NotNull
-    @NotBlank
-    @JsonProperty("image")
-    private Image image;
+    @JsonProperty("imageId")
+    private Long imageId;
 
     @NotNull
-    @NotBlank
-    @JsonProperty("groupList")
-    private List<Groups> groupList;
-
+    @JsonIgnore
+    private List<Groups> groups;
 }

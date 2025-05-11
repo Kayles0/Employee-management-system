@@ -6,8 +6,10 @@ import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface PersonMapper {
+    @Mapping(target = "image", ignore = true)
     Person toEntity(PersonDto dto);
 
+    @Mapping(target = "imageId", source = "image.id")
     PersonDto toDto(Person entity);
 
     @Mapping(target = "id", ignore = true)

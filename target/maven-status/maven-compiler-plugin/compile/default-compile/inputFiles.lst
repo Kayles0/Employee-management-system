@@ -1,8 +1,11 @@
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\config\SecurityConfig.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\controller\AuthenticationController.java
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\controller\ImageController.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\controller\impl\AuthenticationControllerImpl.java
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\controller\impl\ImageControllerImpl.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\controller\impl\PersonControllerImpl.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\controller\PersonController.java
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\dto\ImageDto.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\dto\PersonDto.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\dto\RoleDto.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\dto\security\AuthenticationRequest.java
@@ -26,6 +29,7 @@ D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_manage
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\exception\EntityNotFoundException.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\exception\JwtParsingException.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\exception\LoginDuplicateException.java
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\mapper\ImageMapper.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\mapper\JwtPersonMapper.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\mapper\PersonMapper.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\mapper\RoleMapper.java
@@ -36,7 +40,11 @@ D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_manage
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\repository\PersonRepository.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\repository\RoleRepository.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\security\JwtAuthenticationFilter.java
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\ImageService.java
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\impl\ImageServiceImpl.java
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\impl\PersonRegisterServiceImpl.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\impl\PersonServiceImpl.java
+D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\PersonRegisterService.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\PersonService.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\security\AuthenticationService.java
 D:\Programms\Employee-management-system\src\main\java\com\kayles\employee_management_system\Service\security\JwtAuthorizationService.java

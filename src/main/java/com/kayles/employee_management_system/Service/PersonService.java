@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface PersonService {
+    PersonDto[] getAllPersons();
+
     PersonDto read(Long id);
 
     void update(PersonDto personDto);
