@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface PersonService {
+    PersonDto findMe();
+
     PersonDto[] getAllPersons();
 
     PersonDto read(Long id);

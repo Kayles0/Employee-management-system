@@ -69,4 +69,8 @@ public class PersonDto {
     @NotNull
     @JsonIgnore
     private List<Groups> groups;
+
+    @NotNull
+    @JsonProperty("is_deleted")
+    private Boolean isDeleted;
 }

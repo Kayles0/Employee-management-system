@@ -1,6 +1,7 @@
 package com.kayles.employee_management_system.Service;
 
 import com.kayles.employee_management_system.dto.ImageDto;
+import com.kayles.employee_management_system.dto.PersonDto;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ImageService {

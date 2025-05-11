@@ -32,8 +32,8 @@ public class SecurityConfig {
             "/swagger-resources/**",
             "/swagger-ui/**",
             "/v3/api-docs/**",
-            "/webjars/**",
-            "/person/**"
+            "/webjars/**"
+//            "/person/**"
     };
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
@@ -52,8 +52,8 @@ public class SecurityConfig {
                             .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                             .requestMatchers(AUTH_WHITELIST).permitAll()
                             .requestMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
-//                            .anyRequest().authenticated();
-                            .anyRequest().permitAll(); //УБРАТЬ!!!!!!!
+                            .anyRequest().authenticated();
+//                            .anyRequest().permitAll(); //УБРАТЬ!!!!!!!
                 })
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

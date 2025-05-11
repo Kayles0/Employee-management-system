@@ -45,6 +45,15 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public PersonDto findMe() {
+        logger.info("Find me person");
+        JwtPerson jwtPerson = jwtAuthorizationService.extractJwtPerson();
+        System.err.println("ID" + jwtPerson.getId());
+        Person person = personRepository.findById(jwtPerson.getId()).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        return personMapper.toDto(person);
+    }
+
+    @Override
     public void update(PersonDto dto) {
         logger.info("Update person id: {}", dto.getId());
         JwtPerson jwtPerson = jwtAuthorizationService.extractJwtPerson();

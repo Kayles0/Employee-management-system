@@ -24,6 +24,12 @@ public class PersonControllerImpl implements PersonController {
         return ResponseEntity.ok(personService.getAllPersons());
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<PersonDto> getMe(){
+        logger.info("Get me");
+        return ResponseEntity.ok(personService.findMe());
+    }
+
     @Override
     @GetMapping("{id}")
     public ResponseEntity<PersonDto> readById(@PathVariable Long id) {
