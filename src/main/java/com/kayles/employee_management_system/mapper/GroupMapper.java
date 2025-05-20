@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", uses = PersonShortMapper.class)
 public interface GroupMapper {
-    Group toGroup(GroupDto dto);
+    Group toEntity(GroupDto dto);
 
     @Mapping(target = "persons", source = "persons")
     GroupDto toDto(Group entity);

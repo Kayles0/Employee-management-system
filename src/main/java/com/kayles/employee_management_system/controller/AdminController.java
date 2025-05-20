@@ -23,4 +23,11 @@ public interface AdminController {
 
     @Operation(summary = "Удаление изображения")
     ResponseEntity<Void> deleteImageById(Long id);
+
+    @Operation(summary = "Добавления пользователя по id в группу по name")
+    ResponseEntity<PersonDto> addPersonToGroup(String groupName, Long userId);
+
+    @Operation(summary = "Удаление пользователя по id из группы по name")
+    ResponseEntity<PersonDto> deletePersonFromGroup(String groupName, Long userId);
+
 }

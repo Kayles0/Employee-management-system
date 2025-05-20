@@ -31,7 +31,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public GroupDto createGroup(GroupDto groupDto) {
-        Group group = groupMapper.toGroup(groupDto);
+        Group group = groupMapper.toEntity(groupDto);
         return groupMapper.toDto(groupRepository.save(group));
     }
 

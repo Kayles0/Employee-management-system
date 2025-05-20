@@ -17,6 +17,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Transactional
 public class ImageServiceImpl implements ImageService {
+
     private final ImageRepository imageRepository;
     private final ImageMapper imageMapper;
 
@@ -43,7 +44,8 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public ImageDto read(Long id) {
-        Image image = imageRepository.findByIdAndIsNotDeleted(id).orElseThrow(() -> new EntityNotFoundException("Image not found with id {}", id));
+        Image image = imageRepository.findByIdAndIsNotDeleted(id)
+                .orElseThrow(() -> new EntityNotFoundException("Image not found with id {}", id));
         return imageMapper.toDto(image);
     }
 

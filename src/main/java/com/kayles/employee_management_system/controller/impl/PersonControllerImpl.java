@@ -2,15 +2,12 @@ package com.kayles.employee_management_system.controller.impl;
 
 import com.kayles.employee_management_system.Service.PersonService;
 import com.kayles.employee_management_system.controller.PersonController;
-import com.kayles.employee_management_system.dto.ImageDto;
 import com.kayles.employee_management_system.dto.PersonDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -57,10 +54,11 @@ public class PersonControllerImpl implements PersonController {
     }
 
     @Override
-    @PostMapping(value = "/setImage", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ImageDto> updateImage(@RequestParam("file")MultipartFile file) {
-        logger.info("Update image");
-        return ResponseEntity.ok(personService.updateImageFromFile(file));
+    @PutMapping("/setImage/{imageId}")
+    public ResponseEntity<Void> updateImage(@PathVariable Long imageId){
+        logger.info("Update image with id {}", imageId);
+        personService.setImageById(imageId);
+        return ResponseEntity.ok().build();
     }
 
    @Override
@@ -70,4 +68,19 @@ public class PersonControllerImpl implements PersonController {
         personService.deleteImage();
         return ResponseEntity.ok().build();
    }
+
+   @Override
+   @PutMapping("/addToGroup")
+   public ResponseEntity<PersonDto> addToGroupByName(@RequestBody String groupName){
+        personService.addGroupByName(groupName);
+        return ResponseEntity.ok(personService.findMe());
+   }
+
+   @Override
+    @PutMapping("/deleteFromGroup")
+    public ResponseEntity<PersonDto> deleteFromGroupByName(@RequestBody String groupName){
+        personService.deleteFromGroupByName(groupName);
+        return ResponseEntity.ok(personService.findMe());
+   }
+
 }

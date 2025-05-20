@@ -64,8 +64,8 @@ public class PersonDto {
     private Long imageId;
 
     @NotNull
-    @JsonIgnore
-    private List<GroupDto> groups;
+    @JsonProperty("groups")
+    private List<GroupShortDto> groups;
 
     @NotNull
     @JsonProperty("is_deleted")

@@ -30,7 +30,8 @@ public class AdminControllerImpl implements AdminController {
     }
 
     @Override
-    public ResponseEntity<Void> deletePersonById(Long id) {
+    @DeleteMapping("/deletePersonById/{id}")
+    public ResponseEntity<Void> deletePersonById(@PathVariable Long id) {
         logger.info("Delete person id {}", id);
         personService.delete(id);
         return ResponseEntity.ok().build();
@@ -50,9 +51,21 @@ public class AdminControllerImpl implements AdminController {
     }
 
     @Override
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/image/{id}")
     public ResponseEntity<Void> deleteImageById(@PathVariable("id") Long id) {
         imageService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<PersonDto> deletePersonFromGroup(String groupName, Long userId) {
+        personService.deleteFromGroupByName(groupName, userId);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<PersonDto> addPersonToGroup(String groupName, Long userId) {
+        personService.addGroupByName(groupName, userId);
         return ResponseEntity.ok().build();
     }
 }

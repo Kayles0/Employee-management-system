@@ -7,12 +7,15 @@ import com.kayles.employee_management_system.dto.ImageDto;
 import com.kayles.employee_management_system.dto.PersonDto;
 import com.kayles.employee_management_system.dto.RoleDto;
 import com.kayles.employee_management_system.dto.security.JwtPerson;
+import com.kayles.employee_management_system.entity.Group;
 import com.kayles.employee_management_system.entity.Image;
 import com.kayles.employee_management_system.entity.Person;
 import com.kayles.employee_management_system.entity.Role;
 import com.kayles.employee_management_system.exception.EntityNotFoundException;
 import com.kayles.employee_management_system.mapper.ImageMapper;
 import com.kayles.employee_management_system.mapper.PersonMapper;
+import com.kayles.employee_management_system.repository.GroupRepository;
+import com.kayles.employee_management_system.repository.ImageRepository;
 import com.kayles.employee_management_system.repository.PersonRepository;
 import com.kayles.employee_management_system.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -34,8 +38,8 @@ public class PersonServiceImpl implements PersonService {
     private final PersonMapper personMapper;
     private final RoleRepository roleRepository;
     private final JwtAuthorizationService jwtAuthorizationService;
-    private final ImageService imageService;
-    private final ImageMapper imageMapper;
+    private final ImageRepository imageRepository;
+    private final GroupRepository groupRepository;
 
     @Override
     public PersonDto read(Long id) {
@@ -132,19 +136,14 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public ImageDto updateImageFromFile(MultipartFile file) {
+    public void setImageById(Long id) {
         JwtPerson jwtPerson = jwtAuthorizationService.extractJwtPerson();
         Person person = personRepository.findPersonByIdAndIsNotDeleted(jwtPerson.getId())
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
-        if (person.getImage().getId() == 0) {
-            Image image = imageMapper.toEntity(imageService.createFromFile(file));
-            person.setImage(image);
-            personRepository.save(person);
-            return imageMapper.toDto(image);
-        }
-
-        Image image = imageMapper.toEntity(imageService.recreate(person.getImage().getId(), file));
-        return imageMapper.toDto(image);
+        Image image = imageRepository.findByIdAndIsNotDeleted(id)
+                .orElseThrow(() -> new EntityNotFoundException("Image not found"));
+        person.setImage(image);
+        personRepository.save(person);
     }
 
     @Override
@@ -155,4 +154,60 @@ public class PersonServiceImpl implements PersonService {
         person.setImage(null);
         personRepository.save(person);
     }
+
+    @Override
+    public void addGroupByName(String groupName) {
+        JwtPerson jwtPerson = jwtAuthorizationService.extractJwtPerson();
+        Person person = personRepository.findById(jwtPerson.getId())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Group group = groupRepository.findByName(groupName)
+                .orElseThrow(() -> new EntityNotFoundException("Group not found"));
+
+        person.getGroupList().add(group);
+        personRepository.save(person);
+        group.getPersons().add(person);
+        groupRepository.save(group);
+    }
+
+    @Override
+    public void deleteFromGroupByName(String groupName) {
+        JwtPerson jwtPerson = jwtAuthorizationService.extractJwtPerson();
+        Person person = personRepository.findById(jwtPerson.getId())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Group group = groupRepository.findByName(groupName)
+                .orElseThrow(() -> new EntityNotFoundException("Group not found"));
+
+        person.getGroupList().remove(group);
+        personMapper.toDto(personRepository.save(person));
+        group.getPersons().remove(person);
+        groupRepository.save(group);
+    }
+
+    @Override
+    public void addGroupByName(String groupName, Long id) {
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Group group = groupRepository.findByName(groupName)
+                .orElseThrow(() -> new EntityNotFoundException("Group not found"));
+
+        person.getGroupList().add(group);
+        personRepository.save(person);
+        group.getPersons().add(person);
+        groupRepository.save(group);
+    }
+
+    @Override
+    public void deleteFromGroupByName(String groupName, Long id) {
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Group group = groupRepository.findByName(groupName)
+                .orElseThrow(() -> new EntityNotFoundException("Group not found"));
+
+        person.getGroupList().remove(group);
+        PersonDto personDto = personMapper.toDto(personRepository.save(person));
+        group.getPersons().remove(person);
+        groupRepository.save(group);
+    }
+
 }
+

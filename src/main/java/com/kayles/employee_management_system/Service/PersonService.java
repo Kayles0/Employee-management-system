@@ -25,7 +25,15 @@ public interface PersonService {
 
     PersonDto updatePersonRoleById(Long id, RoleDto roleDto);
 
-    ImageDto updateImageFromFile(MultipartFile file);
-
     void deleteImage();
+
+    void setImageById(Long id);
+
+    void addGroupByName(String groupName);
+
+    void addGroupByName(String groupName, Long id);
+
+    void deleteFromGroupByName(String groupName);
+
+    void deleteFromGroupByName(String groupName, Long id);
 }
