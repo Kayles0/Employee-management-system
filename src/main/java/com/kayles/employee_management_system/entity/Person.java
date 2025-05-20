@@ -57,7 +57,7 @@ public class Person extends SoftDeletableEntity{
     @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "person_group", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
-    private List<Groups> groupList;
+    private List<Group> groupList;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

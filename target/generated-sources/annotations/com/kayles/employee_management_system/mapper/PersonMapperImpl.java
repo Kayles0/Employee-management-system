@@ -2,7 +2,7 @@ package com.kayles.employee_management_system.mapper;
 
 import com.kayles.employee_management_system.dto.PersonDto;
 import com.kayles.employee_management_system.dto.RoleDto;
-import com.kayles.employee_management_system.entity.Groups;
+import com.kayles.employee_management_system.entity.Group;
 import com.kayles.employee_management_system.entity.Image;
 import com.kayles.employee_management_system.entity.Person;
 import com.kayles.employee_management_system.entity.Role;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-05-10T23:57:13+0300",
+    date = "2025-05-19T13:26:00+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23 (Oracle Corporation)"
 )
 @Component
@@ -28,6 +28,7 @@ public class PersonMapperImpl implements PersonMapper {
         Person.PersonBuilder<?, ?> person = Person.builder();
 
         person.id( dto.getId() );
+        person.isDeleted( dto.getIsDeleted() );
         person.login( dto.getLogin() );
         person.firstName( dto.getFirstName() );
         person.lastName( dto.getLastName() );
@@ -58,6 +59,7 @@ public class PersonMapperImpl implements PersonMapper {
         personDto.role( roleToRoleDto( entity.getRole() ) );
         personDto.status( entity.getStatus() );
         personDto.department( entity.getDepartment() );
+        personDto.isDeleted( entity.getIsDeleted() );
 
         return personDto.build();
     }
@@ -93,16 +95,16 @@ public class PersonMapperImpl implements PersonMapper {
             exPerson.setDepartment( newPerson.getDepartment() );
         }
         if ( exPerson.getGroupList() != null ) {
-            List<Groups> list = newPerson.getGroupList();
+            List<Group> list = newPerson.getGroupList();
             if ( list != null ) {
                 exPerson.getGroupList().clear();
                 exPerson.getGroupList().addAll( list );
             }
         }
         else {
-            List<Groups> list = newPerson.getGroupList();
+            List<Group> list = newPerson.getGroupList();
             if ( list != null ) {
-                exPerson.setGroupList( new ArrayList<Groups>( list ) );
+                exPerson.setGroupList( new ArrayList<Group>( list ) );
             }
         }
         if ( newPerson.getImage() != null ) {

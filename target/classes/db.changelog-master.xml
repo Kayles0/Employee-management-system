@@ -10,9 +10,6 @@
     <include file="db/changelog/initial/003.create-person-image-table.xml" relativeToChangelogFile="true"/>
     <include file="db/changelog/initial/004.create-person-table.xml" relativeToChangelogFile="true"/>
     <include file="db/changelog/initial/005.create-groups-table.xml" relativeToChangelogFile="true"/>
-    <include file="db/changelog/initial/006.create-employee-table.xml" relativeToChangelogFile="true"/>
-    <include file="db/changelog/initial/007.create-manager-table.xml" relativeToChangelogFile="true"/>
-    <include file="db/changelog/initial/008.create-manager-employee-table.xml" relativeToChangelogFile="true"/>
     <include file="db/changelog/initial/009.create-person-group-table.xml" relativeToChangelogFile="true"/>
     <include file="db/changelog/initial/010.add-foreign-key.xml" relativeToChangelogFile="true"/>
     <include file="db/changelog/initial/011.insert-values.xml" relativeToChangelogFile="true"/>

@@ -32,7 +32,8 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(
                         request.getPassword()
                 ))
-                .role(roleRepository.findByName(RoleEnum.ROLE_USER))
+                .gender(request.getGender())
+                .role(roleRepository.findByName(RoleEnum.ROLE_USER).orElseThrow())
                 .isDeleted(false)
                 .build();
         try {

@@ -1,8 +1,11 @@
 package com.kayles.employee_management_system.Service;
 
+import com.kayles.employee_management_system.dto.ImageDto;
 import com.kayles.employee_management_system.dto.PersonDto;
+import com.kayles.employee_management_system.dto.RoleDto;
 import com.kayles.employee_management_system.entity.Person;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public interface PersonService {
@@ -12,7 +15,7 @@ public interface PersonService {
 
     PersonDto read(Long id);
 
-    void update(PersonDto personDto);
+    PersonDto update(PersonDto personDto);
 
     void delete(Long id);
 
@@ -20,5 +23,9 @@ public interface PersonService {
 
     Person findByLogin(String login);
 
-    void updatePersonRole(Long id, String role);
+    PersonDto updatePersonRoleById(Long id, RoleDto roleDto);
+
+    ImageDto updateImageFromFile(MultipartFile file);
+
+    void deleteImage();
 }

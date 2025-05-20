@@ -1,22 +1,19 @@
 package com.kayles.employee_management_system.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.kayles.employee_management_system.entity.Group;
-import com.kayles.employee_management_system.enums.DepartmentEnum;
 import com.kayles.employee_management_system.enums.GenderEnum;
-import com.kayles.employee_management_system.enums.StatusEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
-
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PersonDto {
+public class PersonShortDto {
     @JsonProperty("id")
     private Long id;
 
@@ -45,27 +42,8 @@ public class PersonDto {
     private String email;
 
     @NotNull
-    @NotBlank
-    @JsonProperty("role")
-    private RoleDto role;
-
-    @NotNull
-    @NotBlank
-    @JsonProperty("status")
-    private StatusEnum status;
-
-    @NotNull
-    @NotBlank
-    @JsonProperty("department")
-    private DepartmentEnum department;
-
-    @NotNull
     @JsonProperty("imageId")
     private Long imageId;
-
-    @NotNull
-    @JsonIgnore
-    private List<GroupDto> groups;
 
     @NotNull
     @JsonProperty("is_deleted")

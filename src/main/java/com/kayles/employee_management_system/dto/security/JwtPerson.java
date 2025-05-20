@@ -1,5 +1,6 @@
 package com.kayles.employee_management_system.dto.security;
 
+import com.kayles.employee_management_system.enums.GenderEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,7 @@ public class JwtPerson implements UserDetails {
     private String login;
     private String password;
     private boolean isDeleted;
+    private GenderEnum gender;
     private final Collection<? extends GrantedAuthority> authorities;
 
 

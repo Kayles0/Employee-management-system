@@ -12,14 +12,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "groups")
-public class Groups extends SoftDeletableEntity {
+public class Group extends SoftDeletableEntity {
     @Column(name = "name", nullable = false)
     private String name;
     @ManyToMany
     @JoinTable(
             name = "person_group",
-            joinColumns = @JoinColumn(name = "group_name", referencedColumnName = "name"),
-            inverseJoinColumns = @JoinColumn(name = "person_login", referencedColumnName = "login")
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id")
     )
     private List<Person> persons;
+
 }

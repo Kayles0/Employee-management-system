@@ -1,18 +1,26 @@
 package com.kayles.employee_management_system.Service.impl;
 
+import com.kayles.employee_management_system.Service.ImageService;
 import com.kayles.employee_management_system.Service.PersonService;
 import com.kayles.employee_management_system.Service.security.JwtAuthorizationService;
+import com.kayles.employee_management_system.dto.ImageDto;
 import com.kayles.employee_management_system.dto.PersonDto;
+import com.kayles.employee_management_system.dto.RoleDto;
 import com.kayles.employee_management_system.dto.security.JwtPerson;
+import com.kayles.employee_management_system.entity.Image;
 import com.kayles.employee_management_system.entity.Person;
+import com.kayles.employee_management_system.entity.Role;
 import com.kayles.employee_management_system.exception.EntityNotFoundException;
+import com.kayles.employee_management_system.mapper.ImageMapper;
 import com.kayles.employee_management_system.mapper.PersonMapper;
 import com.kayles.employee_management_system.repository.PersonRepository;
+import com.kayles.employee_management_system.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,12 +32,15 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
+    private final RoleRepository roleRepository;
     private final JwtAuthorizationService jwtAuthorizationService;
+    private final ImageService imageService;
+    private final ImageMapper imageMapper;
 
     @Override
     public PersonDto read(Long id) {
         logger.info("Read person id: {}", id);
-        Person person = personRepository.findPersonByIdAndIsNotDeleted(id).orElseThrow(()
+        Person person = personRepository.findById(id).orElseThrow(()
                 -> new EntityNotFoundException("Person not found"));
         if (person.getIsDeleted()) {
             throw new EntityNotFoundException("Person is deleted");
@@ -40,7 +51,8 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonDto[] getAllPersons() {
         logger.info("Read all persons");
-        List<Person> persons = personRepository.findAllNotDeleted();
+        List<Person> persons = personRepository.findAllNotDeleted()
+                .orElseThrow(() -> new EntityNotFoundException("Persons not found"));
         return persons.stream().map(personMapper::toDto).toArray(PersonDto[]::new);
     }
 
@@ -48,21 +60,38 @@ public class PersonServiceImpl implements PersonService {
     public PersonDto findMe() {
         logger.info("Find me person");
         JwtPerson jwtPerson = jwtAuthorizationService.extractJwtPerson();
-        System.err.println("ID" + jwtPerson.getId());
         Person person = personRepository.findById(jwtPerson.getId()).orElseThrow(() -> new EntityNotFoundException("User not found"));
         return personMapper.toDto(person);
     }
 
     @Override
-    public void update(PersonDto dto) {
+    public PersonDto update(PersonDto dto) {
         logger.info("Update person id: {}", dto.getId());
+
         JwtPerson jwtPerson = jwtAuthorizationService.extractJwtPerson();
         dto.setId(jwtPerson.getId());
+
         Person newPerson = personMapper.toEntity(dto);
         Person exPerson = personRepository.findById(jwtPerson.getId())
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
         personMapper.update(exPerson, newPerson);
-        personRepository.save(exPerson);
+        Person savedPerson = personRepository.save(exPerson);
+
+        return personMapper.toDto(savedPerson);
+    }
+
+    public PersonDto updateById(PersonDto dto, Long id) {
+        logger.info("Update person id: {}", id);
+
+        dto.setId(id);
+
+        Person newPerson = personMapper.toEntity(dto);
+        Person exPerson = personRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        personMapper.update(exPerson, newPerson);
+        Person savedPerson = personRepository.save(exPerson);
+
+        return personMapper.toDto(savedPerson);
     }
 
     @Override
@@ -85,12 +114,45 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person findByLogin(String login) {
-        return personRepository.findByLogin(login).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        return personRepository.findByLogin(login)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
     @Override
-    public void updatePersonRole(Long id, String role) {
-        Person person = personRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
+    public PersonDto updatePersonRoleById(Long id, RoleDto dto) {
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Role role = roleRepository.findByName(dto.getName())
+                .orElseThrow(() -> new EntityNotFoundException("Role not found"));
 
+        person.setRole(role);
+        personRepository.save(person);
+
+        return personMapper.toDto(person);
+    }
+
+    @Override
+    public ImageDto updateImageFromFile(MultipartFile file) {
+        JwtPerson jwtPerson = jwtAuthorizationService.extractJwtPerson();
+        Person person = personRepository.findPersonByIdAndIsNotDeleted(jwtPerson.getId())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        if (person.getImage().getId() == 0) {
+            Image image = imageMapper.toEntity(imageService.createFromFile(file));
+            person.setImage(image);
+            personRepository.save(person);
+            return imageMapper.toDto(image);
+        }
+
+        Image image = imageMapper.toEntity(imageService.recreate(person.getImage().getId(), file));
+        return imageMapper.toDto(image);
+    }
+
+    @Override
+    public void deleteImage() {
+        JwtPerson jwtPerson = jwtAuthorizationService.extractJwtPerson();
+        Person person = personRepository.findPersonByIdAndIsNotDeleted(jwtPerson.getId())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        person.setImage(null);
+        personRepository.save(person);
     }
 }

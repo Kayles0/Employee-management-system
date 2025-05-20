@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-05-10T00:40:17+0300",
+    date = "2025-05-19T13:26:00+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23 (Oracle Corporation)"
 )
 @Component
@@ -31,6 +31,7 @@ public class JwtPersonMapperImpl implements JwtPersonMapper {
         if ( person.getIsDeleted() != null ) {
             jwtPerson.isDeleted( person.getIsDeleted() );
         }
+        jwtPerson.gender( person.getGender() );
         List<SimpleGrantedAuthority> list = person.getAuthorities();
         if ( list != null ) {
             jwtPerson.authorities( new ArrayList<GrantedAuthority>( list ) );
@@ -49,6 +50,7 @@ public class JwtPersonMapperImpl implements JwtPersonMapper {
 
         person.id( jwtPerson.getId() );
         person.login( jwtPerson.getLogin() );
+        person.gender( jwtPerson.getGender() );
         person.password( jwtPerson.getPassword() );
 
         return person.build();

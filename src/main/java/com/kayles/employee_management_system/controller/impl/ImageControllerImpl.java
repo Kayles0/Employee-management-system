@@ -21,25 +21,16 @@ public class ImageControllerImpl implements ImageController {
 
     @Override
     @PostMapping
-    public ResponseEntity<Void> createImageFromDto(@RequestBody ImageDto dto) {
+    public ResponseEntity<ImageDto> createImageFromDto(@RequestBody ImageDto dto) {
         logger.info("Create image from dto");
-        imageService.create(dto);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(imageService.createFromDto(dto));
     }
 
     @Override
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Void> createImageFromFile(@RequestPart("file") MultipartFile file) {
+    @PostMapping(value = "/file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ImageDto> createImageFromFile(@RequestParam("file") MultipartFile file) {
         logger.info("Create image from file");
-        imageService.createNewImage(file);
-        return ResponseEntity.ok().build();
-    }
-
-    @Override
-    @PostMapping(value = "{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Void> recreateByIdFromFile(@PathVariable Long id, @RequestPart("file") MultipartFile file) {
-        imageService.recreate(id, file);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(imageService.createFromFile(file));
     }
 
     @Override
@@ -48,10 +39,4 @@ public class ImageControllerImpl implements ImageController {
         return ResponseEntity.ok(imageService.read(id).getImage());
     }
 
-    @Override
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-        imageService.delete(id);
-        return ResponseEntity.ok().build();
-    }
 }

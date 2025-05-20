@@ -4,7 +4,7 @@ import com.kayles.employee_management_system.dto.PersonDto;
 import com.kayles.employee_management_system.entity.Person;
 import org.mapstruct.*;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface PersonMapper {
     @Mapping(target = "image", ignore = true)
     Person toEntity(PersonDto dto);
@@ -16,6 +16,6 @@ public interface PersonMapper {
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "role", ignore = true)
     @Mapping(target = "authorities", ignore = true)
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @BeanMapping(nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
     void update(@MappingTarget Person exPerson, Person newPerson);
 }

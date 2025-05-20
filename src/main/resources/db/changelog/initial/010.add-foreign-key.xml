@@ -24,26 +24,6 @@
                                  referencedTableName="person"
                                  referencedColumnNames="id"/>
 
-        <addForeignKeyConstraint baseTableName="employee" baseColumnNames="id"
-                                 constraintName="fk_employee_person"
-                                 referencedTableName="person"
-                                 referencedColumnNames="id"/>
-
-        <addForeignKeyConstraint baseTableName="manager" baseColumnNames="id"
-                                 constraintName="fk_manager_person"
-                                 referencedTableName="person"
-                                 referencedColumnNames="id"/>
-
-        <addForeignKeyConstraint baseTableName="manager_employee" baseColumnNames="manager_id"
-                                 constraintName="fk_manager_employee_manager"
-                                 referencedTableName="manager"
-                                 referencedColumnNames="person_id"/>
-
-        <addForeignKeyConstraint baseTableName="manager_employee" baseColumnNames="employee_id"
-                                 constraintName="fk_manager_employee_employee"
-                                 referencedTableName="employee"
-                                 referencedColumnNames="person_id"/>
-
         <addForeignKeyConstraint baseTableName="person_group" baseColumnNames="person_id" constraintName="fk_person_group_person"
                                  referencedTableName="person"
                                  referencedColumnNames="id"/>

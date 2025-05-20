@@ -14,8 +14,12 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     Optional<Person> findByLogin(String login);
 
     @Query("select p from Person p WHERE p.isDeleted = false ")
-    List<Person> findAllNotDeleted();
+    Optional<List<Person>> findAllNotDeleted();
 
     @Query("SELECT DISTINCT p FROM Person p WHERE p.id = :id AND p.isDeleted = false ")
     Optional<Person> findPersonByIdAndIsNotDeleted(@Param("id") Long id);
+
+    Optional<Person> findByFirstName(String firstName);
+
+    Optional<Person> findByLastName(String lastName);
 }

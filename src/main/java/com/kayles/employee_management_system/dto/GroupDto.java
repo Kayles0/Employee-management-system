@@ -1,7 +1,6 @@
 package com.kayles.employee_management_system.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.kayles.employee_management_system.enums.RoleEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -9,18 +8,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoleDto {
-    @NotNull
-    @NotBlank
+public class GroupDto {
     @JsonProperty("id")
-    private Long id;
+    private int id;
 
-    @NotNull
     @NotBlank
+    @NotNull
     @JsonProperty("name")
-    private RoleEnum name;
+    private String name;
+
+    @NotBlank
+    @NotNull
+    @JsonProperty("persons")
+    private List<PersonShortDto> persons;
 }

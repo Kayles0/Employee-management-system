@@ -1,15 +1,16 @@
 package com.kayles.employee_management_system.Service;
 
 import com.kayles.employee_management_system.dto.ImageDto;
-import com.kayles.employee_management_system.dto.PersonDto;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+@Service
 public interface ImageService {
-    void createNewImage(MultipartFile imageFile);
+    ImageDto createFromFile(MultipartFile imageFile);
 
-    void create(ImageDto dto);
+    ImageDto createFromDto(ImageDto dto);
 
-    void recreate(Long id, MultipartFile imageFile);
+    ImageDto recreate(Long id, MultipartFile imageFile);
 
     ImageDto read(Long id);
 

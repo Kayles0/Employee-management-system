@@ -21,7 +21,7 @@ public class PersonRegisterServiceImpl implements PersonRegisterService {
 
     @Override
     public Person register(Person person) {
-        Role rolePerson = roleRepository.findByName(RoleEnum.ROLE_USER);
+        Role rolePerson = roleRepository.findByName(RoleEnum.ROLE_USER).orElseThrow();
 
         person.setRole(rolePerson);
 
