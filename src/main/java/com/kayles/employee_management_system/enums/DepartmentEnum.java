@@ -1,0 +1,9 @@
+package com.kayles.employee_management_system.enums;
+
+public enum DepartmentEnum {
+    SOFTWARE_DEVELOPMENT_DEPARTMENT,
+    QUALITY_ASSURANCE_DEPARTMENT,
+    DEVOPS_DEPARTMENT,
+    SUPPORT_AND_OPERATIONS_DEPARTMENT,
+    MOBILE_DEVELOPMENT_DEPARTMENT
+}

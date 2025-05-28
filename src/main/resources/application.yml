@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/Employees-management-system
+    username: Admin
+    driver-class-name: org.postgresql.Driver
+    password: 1122
+  jpa:
+    show-sql: true
+  liquibase:
+    enabled: true
+    default-schema: public
+    drop-first: true
+    change-log: db.changelog-master.xml
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 10MB
+      enabled: true
+server:
+  port: 1717
+logging:
+  level:
+    org.springframework.security: TRACE
+jwt:
+  secret: JSADUS2733747IYDSDIFh2974HSH82384HSBAPSUDBVo3479
