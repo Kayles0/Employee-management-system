@@ -51,7 +51,9 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public ImageDto recreate(Long id, MultipartFile imageFile) {
-        Image image = imageRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Image not found with id {}", id));
+        Image image = imageRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Image not found with id {}", id));
         try {
             image.setImage(imageFile.getBytes());
             imageRepository.save(image);

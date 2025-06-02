@@ -1,6 +1,5 @@
 package com.kayles.employee_management_system.Service;
 
-import com.kayles.employee_management_system.dto.ImageDto;
 import com.kayles.employee_management_system.dto.PersonDto;
 import com.kayles.employee_management_system.dto.RoleDto;
 import com.kayles.employee_management_system.entity.Person;
@@ -36,4 +35,10 @@ public interface PersonService {
     void deleteFromGroupByName(String groupName);
 
     void deleteFromGroupByName(String groupName, Long id);
+
+    PersonDto updateById(PersonDto dto, Long id);
+
+    void updateImage(MultipartFile file);
+
+    void updateImage(Long id, MultipartFile file);
 }

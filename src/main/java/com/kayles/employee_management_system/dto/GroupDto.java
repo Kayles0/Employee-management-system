@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public class GroupDto {
     @JsonProperty("id")
-    private int id;
+    private Long id;
 
     @NotBlank
     @NotNull

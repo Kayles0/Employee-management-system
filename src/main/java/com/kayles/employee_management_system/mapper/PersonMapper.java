@@ -25,10 +25,11 @@ public interface PersonMapper {
     @Mapping(target = "role", ignore = true)
     @Mapping(target = "authorities", ignore = true)
     @BeanMapping(nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+    // MappingTarger необяз
     void update(@MappingTarget Person exPerson, Person newPerson);
 
     default List<GroupShortDto> mapGroupToDto(List<Group> groupList) {
-        if (groupList == null) return Collections.emptyList();
+        if (groupList == null) return List.of();
         return groupList.stream()
                 .map(this::mapGroupToDto)
                 .collect(Collectors.toList());

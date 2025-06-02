@@ -4,6 +4,7 @@ import com.kayles.employee_management_system.dto.PersonDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 @Tag(name = "Контроллер пользователя")
 public interface PersonController {
@@ -24,6 +25,9 @@ public interface PersonController {
 
     @Operation(summary = "Обновление картинки")
     ResponseEntity<Void> updateImage(Long imageId);
+
+    @Operation(summary = "Загрузка нового изображения")
+    ResponseEntity<Void> recreateImage(MultipartFile file);
 
     @Operation(summary = "Удалени своего изображения")
     ResponseEntity<Void> deleteImage();

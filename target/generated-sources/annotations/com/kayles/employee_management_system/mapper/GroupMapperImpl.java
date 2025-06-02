@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-05-20T16:50:34+0300",
+    date = "2025-05-28T12:51:01+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23 (Oracle Corporation)"
 )
 @Component
@@ -27,13 +27,13 @@ public class GroupMapperImpl implements GroupMapper {
             return null;
         }
 
-        Group group = new Group();
+        Group.GroupBuilder<?, ?> group = Group.builder();
 
-        group.setId( (long) dto.getId() );
-        group.setName( dto.getName() );
-        group.setPersons( personShortDtoListToPersonList( dto.getPersons() ) );
+        group.id( dto.getId() );
+        group.name( dto.getName() );
+        group.persons( personShortDtoListToPersonList( dto.getPersons() ) );
 
-        return group;
+        return group.build();
     }
 
     @Override
@@ -45,9 +45,7 @@ public class GroupMapperImpl implements GroupMapper {
         GroupDto.GroupDtoBuilder groupDto = GroupDto.builder();
 
         groupDto.persons( mapPersonToDto( entity.getPersons() ) );
-        if ( entity.getId() != null ) {
-            groupDto.id( entity.getId().intValue() );
-        }
+        groupDto.id( entity.getId() );
         groupDto.name( entity.getName() );
 
         return groupDto.build();

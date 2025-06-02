@@ -21,6 +21,9 @@ public interface AdminController {
     @Operation(summary = "Перезапись изображения")
     ResponseEntity<Void> recreateByIdFromFile(Long id, MultipartFile file);
 
+    @Operation(summary = "Обновление изображения пользователя")
+    ResponseEntity<Void> recreateImageForPersonById(Long userId, MultipartFile file);
+
     @Operation(summary = "Удаление изображения")
     ResponseEntity<Void> deleteImageById(Long id);
 
@@ -30,4 +33,6 @@ public interface AdminController {
     @Operation(summary = "Удаление пользователя по id из группы по name")
     ResponseEntity<PersonDto> deletePersonFromGroup(String groupName, Long userId);
 
+    @Operation(summary = "Обновление пользователя по id")
+    ResponseEntity<PersonDto> updatePersonById(Long id, PersonDto dto);
 }

@@ -3,7 +3,6 @@ package com.kayles.employee_management_system.Service.impl;
 import com.kayles.employee_management_system.Service.ImageService;
 import com.kayles.employee_management_system.Service.PersonService;
 import com.kayles.employee_management_system.Service.security.JwtAuthorizationService;
-import com.kayles.employee_management_system.dto.ImageDto;
 import com.kayles.employee_management_system.dto.PersonDto;
 import com.kayles.employee_management_system.dto.RoleDto;
 import com.kayles.employee_management_system.dto.security.JwtPerson;
@@ -12,7 +11,6 @@ import com.kayles.employee_management_system.entity.Image;
 import com.kayles.employee_management_system.entity.Person;
 import com.kayles.employee_management_system.entity.Role;
 import com.kayles.employee_management_system.exception.EntityNotFoundException;
-import com.kayles.employee_management_system.mapper.ImageMapper;
 import com.kayles.employee_management_system.mapper.PersonMapper;
 import com.kayles.employee_management_system.repository.GroupRepository;
 import com.kayles.employee_management_system.repository.ImageRepository;
@@ -23,9 +21,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -84,6 +82,7 @@ public class PersonServiceImpl implements PersonService {
         return personMapper.toDto(savedPerson);
     }
 
+    @Override
     public PersonDto updateById(PersonDto dto, Long id) {
         logger.info("Update person id: {}", id);
 
@@ -147,6 +146,41 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public void updateImage(MultipartFile file) {
+        JwtPerson jwtPerson = jwtAuthorizationService.extractJwtPerson();
+        Person person = personRepository.findPersonByIdAndIsNotDeleted(jwtPerson.getId())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        try {
+            Image image = Image.builder()
+                    .image(file.getBytes())
+                    .isDeleted(false)
+                    .build();
+            image = imageRepository.save(image);
+            person.setImage(image);
+            personRepository.save(person);
+        } catch (IOException e) {
+            throw new EntityNotFoundException("Error updating image file");
+        }
+    }
+
+    @Override
+    public void updateImage(Long id, MultipartFile file) {
+        Person person = personRepository.findPersonByIdAndIsNotDeleted(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        try {
+            Image image = Image.builder()
+                    .image(file.getBytes())
+                    .isDeleted(false)
+                    .build();
+            image = imageRepository.save(image);
+            person.setImage(image);
+            personRepository.save(person);
+        } catch (IOException e) {
+            throw new EntityNotFoundException("Error updating image file");
+        }
+    }
+
+    @Override
     public void deleteImage() {
         JwtPerson jwtPerson = jwtAuthorizationService.extractJwtPerson();
         Person person = personRepository.findPersonByIdAndIsNotDeleted(jwtPerson.getId())
@@ -162,11 +196,12 @@ public class PersonServiceImpl implements PersonService {
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
         Group group = groupRepository.findByName(groupName)
                 .orElseThrow(() -> new EntityNotFoundException("Group not found"));
-
-        person.getGroupList().add(group);
-        personRepository.save(person);
-        group.getPersons().add(person);
-        groupRepository.save(group);
+        if  (!person.getGroupList().contains(group)) {
+            person.getGroupList().add(group);
+            personRepository.save(person);
+            group.getPersons().add(person);
+            groupRepository.save(group);
+        }
     }
 
     @Override
@@ -190,10 +225,12 @@ public class PersonServiceImpl implements PersonService {
         Group group = groupRepository.findByName(groupName)
                 .orElseThrow(() -> new EntityNotFoundException("Group not found"));
 
-        person.getGroupList().add(group);
-        personRepository.save(person);
-        group.getPersons().add(person);
-        groupRepository.save(group);
+        if (!person.getGroupList().contains(group)) {
+            person.getGroupList().add(group);
+            personRepository.save(person);
+            group.getPersons().add(person);
+            groupRepository.save(group);
+        }
     }
 
     @Override
