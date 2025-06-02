@@ -1,13 +1,16 @@
 package com.kayles.employee_management_system.controller.impl;
 
+import com.kayles.employee_management_system.Service.ImageService;
 import com.kayles.employee_management_system.Service.PersonService;
 import com.kayles.employee_management_system.controller.PersonController;
 import com.kayles.employee_management_system.dto.PersonDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -61,7 +64,15 @@ public class PersonControllerImpl implements PersonController {
         return ResponseEntity.ok().build();
     }
 
-   @Override
+    @Override
+    @PostMapping(value = "/recreateImage", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Void> recreateImage(@RequestParam("file") MultipartFile file) {
+        logger.info("Recreate image");
+        personService.updateImage(file);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
    @DeleteMapping("/deleteImage")
    public ResponseEntity<Void> deleteImage() {
         logger.info("Delete image");

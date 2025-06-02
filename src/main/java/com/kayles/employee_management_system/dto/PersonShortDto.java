@@ -1,7 +1,9 @@
 package com.kayles.employee_management_system.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.kayles.employee_management_system.enums.DepartmentEnum;
 import com.kayles.employee_management_system.enums.GenderEnum;
+import com.kayles.employee_management_system.enums.StatusEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -40,6 +42,16 @@ public class PersonShortDto {
     @NotBlank
     @JsonProperty("email")
     private String email;
+
+    @NotNull
+    @NotBlank
+    @JsonProperty("status")
+    private StatusEnum status;
+
+    @NotNull
+    @NotBlank
+    @JsonProperty("department")
+    private DepartmentEnum department;
 
     @NotNull
     @JsonProperty("imageId")

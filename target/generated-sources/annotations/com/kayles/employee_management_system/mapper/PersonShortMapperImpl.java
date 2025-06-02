@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-05-20T16:50:35+0300",
+    date = "2025-05-28T12:51:01+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23 (Oracle Corporation)"
 )
 @Component
@@ -29,6 +29,8 @@ public class PersonShortMapperImpl implements PersonShortMapper {
         person.lastName( dto.getLastName() );
         person.gender( dto.getGender() );
         person.email( dto.getEmail() );
+        person.status( dto.getStatus() );
+        person.department( dto.getDepartment() );
 
         return person.build();
     }
@@ -48,6 +50,8 @@ public class PersonShortMapperImpl implements PersonShortMapper {
         personShortDto.firstName( entity.getFirstName() );
         personShortDto.lastName( entity.getLastName() );
         personShortDto.email( entity.getEmail() );
+        personShortDto.status( entity.getStatus() );
+        personShortDto.department( entity.getDepartment() );
         personShortDto.isDeleted( entity.getIsDeleted() );
 
         return personShortDto.build();

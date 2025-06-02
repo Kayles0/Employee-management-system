@@ -2,6 +2,7 @@ package com.kayles.employee_management_system.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 @Table(name = "groups")
 public class Group extends SoftDeletableEntity {
     @Column(name = "name", nullable = false)

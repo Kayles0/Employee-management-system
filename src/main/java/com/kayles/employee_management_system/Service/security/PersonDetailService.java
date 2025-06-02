@@ -5,11 +5,9 @@ import com.kayles.employee_management_system.dto.security.JwtPerson;
 import com.kayles.employee_management_system.entity.Person;
 import com.kayles.employee_management_system.exception.EntityNotFoundException;
 import com.kayles.employee_management_system.mapper.JwtPersonMapper;
-import com.kayles.employee_management_system.mapper.PersonMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;

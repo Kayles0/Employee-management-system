@@ -12,6 +12,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,14 +28,23 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public GroupDto[] readAllGroups() {
         List<Group> groups = groupRepository.findAllWithPersons();
-        return groups.stream().map(groupMapper::toDto).toArray(GroupDto[]::new);
+        return groups.stream()
+                .map(groupMapper::toDto)
+                .toArray(GroupDto[]::new);
     }
 
     @Override
     public GroupDto createGroup(GroupDto groupDto) {
-        Group group = groupMapper.toEntity(groupDto);
-        return groupMapper.toDto(groupRepository.save(group));
+        Group group = Group.builder()
+                .name(groupDto.getName())
+                .isDeleted(false)
+                .persons(new ArrayList<>())
+                .build();
+        group = groupRepository.save(group);
+        return groupMapper.toDto(group);
     }
+
+
 
     @Override
     public GroupDto findById(Long id) {
@@ -47,10 +58,12 @@ public class GroupServiceImpl implements GroupService {
                 .orElseThrow(() -> new EntityNotFoundException("Group not found"));
         Person person = personRepository.findPersonByIdAndIsNotDeleted(personId)
                 .orElseThrow(() -> new EntityNotFoundException("Person not found"));
-        group.getPersons().add(person);
-        groupRepository.save(group);
-        person.getGroupList().add(group);
-        personRepository.save(person);
+        if (!group.getPersons().contains(person)) {
+            group.getPersons().add(person);
+            groupRepository.save(group);
+            person.getGroupList().add(group);
+            personRepository.save(person);
+        }
     }
 
 }

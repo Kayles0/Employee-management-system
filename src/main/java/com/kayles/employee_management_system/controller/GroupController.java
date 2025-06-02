@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 @Tag(name = "Контроллер групп")
 public interface GroupController {
     @Operation(summary = "Получение всех групп")
+    //лучше обернуть в дто класс где внутри только список
     ResponseEntity<GroupDto[]> groupList();
 
     @Operation(summary = "Создание новой группы")

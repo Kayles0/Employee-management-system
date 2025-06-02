@@ -1,8 +1,6 @@
 package com.kayles.employee_management_system.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.kayles.employee_management_system.entity.Group;
 import com.kayles.employee_management_system.enums.DepartmentEnum;
 import com.kayles.employee_management_system.enums.GenderEnum;
 import com.kayles.employee_management_system.enums.StatusEnum;

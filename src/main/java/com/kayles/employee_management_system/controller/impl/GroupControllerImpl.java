@@ -4,7 +4,6 @@ import com.kayles.employee_management_system.Service.GroupService;
 import com.kayles.employee_management_system.Service.PersonService;
 import com.kayles.employee_management_system.controller.GroupController;
 import com.kayles.employee_management_system.dto.GroupDto;
-import com.kayles.employee_management_system.repository.GroupRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,6 @@ public class GroupControllerImpl implements GroupController {
 
     private final GroupService groupService;
     private final PersonService personService;
-    private final GroupRepository groupRepository;
 
     @Override
     @GetMapping("/all")
