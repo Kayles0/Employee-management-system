@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.kayles.employee_management_system.integrationTest.AuthenticationControllerIntegrationTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.980 s -- in com.kayles.employee_management_system.integrationTest.AuthenticationControllerIntegrationTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.062 s -- in com.kayles.employee_management_system.integrationTest.AuthenticationControllerIntegrationTest

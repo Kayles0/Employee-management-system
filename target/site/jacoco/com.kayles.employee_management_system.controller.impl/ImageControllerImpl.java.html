@@ -22,21 +22,21 @@ public class ImageControllerImpl implements ImageController {
     @Override
     @PostMapping
     public ResponseEntity&lt;ImageDto&gt; createImageFromDto(@RequestBody ImageDto dto) {
-<span class="nc" id="L25">        logger.info(&quot;Create image from dto&quot;);</span>
-<span class="nc" id="L26">        return ResponseEntity.ok(imageService.createFromDto(dto));</span>
+<span class="fc" id="L25">        logger.info(&quot;Create image from dto&quot;);</span>
+<span class="fc" id="L26">        return ResponseEntity.ok(imageService.createFromDto(dto));</span>
     }
 
     @Override
     @PostMapping(value = &quot;/file&quot;, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity&lt;ImageDto&gt; createImageFromFile(@RequestParam(&quot;file&quot;) MultipartFile file) {
-<span class="nc" id="L32">        logger.info(&quot;Create image from file&quot;);</span>
-<span class="nc" id="L33">        return ResponseEntity.ok(imageService.createFromFile(file));</span>
+<span class="fc" id="L32">        logger.info(&quot;Create image from file&quot;);</span>
+<span class="fc" id="L33">        return ResponseEntity.ok(imageService.createFromFile(file));</span>
     }
 
     @Override
     @GetMapping(value = &quot;/{id}&quot;, produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity&lt;byte[]&gt; readImageById(@PathVariable Long id) {
-<span class="nc" id="L39">        return ResponseEntity.ok(imageService.read(id).getImage());</span>
+<span class="fc" id="L39">        return ResponseEntity.ok(imageService.read(id).getImage());</span>
     }
 
 }

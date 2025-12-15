@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.155" tests="11" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.kayles.employee_management_system.test.controller.GroupControllerImplTest" time="0.131" tests="7" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -66,15 +66,26 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="extractLogin_WithEmptyToken_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.099"/>
-  <testcase name="isTokenValid_WithValidTokenAndMatchingUserDetails_ReturnsTrue" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.019"/>
-  <testcase name="isTokenValid_WithMalformedToken_ReturnsFalseOrThrows" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.003"/>
-  <testcase name="extractLogin_WithTamperedToken_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.003"/>
-  <testcase name="extractLogin_WithNullToken_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.002"/>
-  <testcase name="isTokenValid_WithValidTokenAndNonMatchingUserDetails_ReturnsFalse" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.003"/>
-  <testcase name="extractLogin_WithValidToken_ReturnsUsername" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.002"/>
-  <testcase name="generateToken_WithValidJwtPerson_ReturnsValidToken" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.009"/>
-  <testcase name="extractLogin_WithInvalidTokenFormat_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.003"/>
-  <testcase name="extractAllClaims_WithInvalidBase64_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.001"/>
-  <testcase name="isTokenExpired_WithExpiredToken_ReturnsFalse" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.005"/>
+  <testcase name="createGroup_WithNullDto_ShouldPassNullToService" classname="com.kayles.employee_management_system.test.controller.GroupControllerImplTest" time="0.103">
+    <system-out><![CDATA[2025-12-15T18:58:59.309+03:00  INFO 18976 --- [           main] c.k.e.c.impl.GroupControllerImpl         : Create Group
+]]></system-out>
+  </testcase>
+  <testcase name="groupList_ShouldReturnAllGroups" classname="com.kayles.employee_management_system.test.controller.GroupControllerImplTest" time="0.007"/>
+  <testcase name="addMeToGroupById_WhenUserNotFound_ShouldThrowException" classname="com.kayles.employee_management_system.test.controller.GroupControllerImplTest" time="0.004"/>
+  <testcase name="findGroupById_ShouldReturnGroup" classname="com.kayles.employee_management_system.test.controller.GroupControllerImplTest" time="0.002">
+    <system-out><![CDATA[2025-12-15T18:58:59.345+03:00  INFO 18976 --- [           main] c.k.e.c.impl.GroupControllerImpl         : Find Group by ID 1
+]]></system-out>
+  </testcase>
+  <testcase name="addMeToGroupById_ShouldAddCurrentUser" classname="com.kayles.employee_management_system.test.controller.GroupControllerImplTest" time="0.004">
+    <system-out><![CDATA[2025-12-15T18:58:59.349+03:00  INFO 18976 --- [           main] c.k.e.c.impl.GroupControllerImpl         : Add me (id: 100) to Group by ID 1
+]]></system-out>
+  </testcase>
+  <testcase name="createGroup_ShouldCreateAndReturnGroup" classname="com.kayles.employee_management_system.test.controller.GroupControllerImplTest" time="0.002">
+    <system-out><![CDATA[2025-12-15T18:58:59.352+03:00  INFO 18976 --- [           main] c.k.e.c.impl.GroupControllerImpl         : Create Group
+]]></system-out>
+  </testcase>
+  <testcase name="findGroupById_WithInvalidId_ShouldReturnNull" classname="com.kayles.employee_management_system.test.controller.GroupControllerImplTest" time="0.003">
+    <system-out><![CDATA[2025-12-15T18:58:59.355+03:00  INFO 18976 --- [           main] c.k.e.c.impl.GroupControllerImpl         : Find Group by ID 999
+]]></system-out>
+  </testcase>
 </testsuite>

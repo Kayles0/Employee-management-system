@@ -2,7 +2,12 @@ D:\Programms\Employee-management-system\src\test\java\com\kayles\employee_manage
 D:\Programms\Employee-management-system\src\test\java\com\kayles\employee_management_system\integrationTest\AuthenticationControllerIntegrationTest.java
 D:\Programms\Employee-management-system\src\test\java\com\kayles\employee_management_system\test\controller\AdminControllerImplTest.java
 D:\Programms\Employee-management-system\src\test\java\com\kayles\employee_management_system\test\controller\AuthenticationControllerTest.java
+D:\Programms\Employee-management-system\src\test\java\com\kayles\employee_management_system\test\controller\GroupControllerImplTest.java
+D:\Programms\Employee-management-system\src\test\java\com\kayles\employee_management_system\test\controller\ImageControllerImplTest.java
 D:\Programms\Employee-management-system\src\test\java\com\kayles\employee_management_system\test\controller\PersonControllerImplTest.java
 D:\Programms\Employee-management-system\src\test\java\com\kayles\employee_management_system\test\service\AuthenticationServiceTest.java
+D:\Programms\Employee-management-system\src\test\java\com\kayles\employee_management_system\test\service\GroupServiceImplTest.java
+D:\Programms\Employee-management-system\src\test\java\com\kayles\employee_management_system\test\service\ImageServiceImplTest.java
 D:\Programms\Employee-management-system\src\test\java\com\kayles\employee_management_system\test\service\JwtServiceTest.java
+D:\Programms\Employee-management-system\src\test\java\com\kayles\employee_management_system\test\service\PersonServiceImplTest.java
 D:\Programms\Employee-management-system\src\test\java\com\kayles\employee_management_system\TestJwtUtil.java

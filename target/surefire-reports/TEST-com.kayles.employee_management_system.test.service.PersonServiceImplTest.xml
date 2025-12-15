@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.155" tests="11" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.198" tests="23" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -66,15 +66,60 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="extractLogin_WithEmptyToken_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.099"/>
-  <testcase name="isTokenValid_WithValidTokenAndMatchingUserDetails_ReturnsTrue" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.019"/>
-  <testcase name="isTokenValid_WithMalformedToken_ReturnsFalseOrThrows" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.003"/>
-  <testcase name="extractLogin_WithTamperedToken_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.003"/>
-  <testcase name="extractLogin_WithNullToken_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.002"/>
-  <testcase name="isTokenValid_WithValidTokenAndNonMatchingUserDetails_ReturnsFalse" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.003"/>
-  <testcase name="extractLogin_WithValidToken_ReturnsUsername" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.002"/>
-  <testcase name="generateToken_WithValidJwtPerson_ReturnsValidToken" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.009"/>
-  <testcase name="extractLogin_WithInvalidTokenFormat_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.003"/>
-  <testcase name="extractAllClaims_WithInvalidBase64_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.001"/>
-  <testcase name="isTokenExpired_WithExpiredToken_ReturnsFalse" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.005"/>
+  <testcase name="addGroupByName_WithId_ShouldAddGroupToSpecificUser" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.128"/>
+  <testcase name="read_WithValidId_ShouldReturnPersonDto" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.003">
+    <system-out><![CDATA[2025-12-15T18:59:01.039+03:00  INFO 18976 --- [           main] c.k.e.service.impl.PersonServiceImpl     : Read person id: 1
+]]></system-out>
+  </testcase>
+  <testcase name="updateImage_WithId_ShouldUpdateSpecificUserImage" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.003"/>
+  <testcase name="read_WithNonExistentId_ShouldThrowEntityNotFoundException" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.003">
+    <system-out><![CDATA[2025-12-15T18:59:01.046+03:00  INFO 18976 --- [           main] c.k.e.service.impl.PersonServiceImpl     : Read person id: 999
+]]></system-out>
+  </testcase>
+  <testcase name="updateImage_ForCurrentUser_ShouldCreateAndSetNewImage" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.003"/>
+  <testcase name="delete_CurrentUser_ShouldSoftDeleteCurrentUser" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.002"/>
+  <testcase name="getAllPersons_ShouldReturnAllNotDeletedPersons" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.005">
+    <system-out><![CDATA[2025-12-15T18:59:01.056+03:00  INFO 18976 --- [           main] c.k.e.service.impl.PersonServiceImpl     : Read all persons
+]]></system-out>
+  </testcase>
+  <testcase name="addGroupByName_ForCurrentUser_WhenAlreadyInGroup_ShouldNotAddAgain" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.003"/>
+  <testcase name="findByLogin_WithNonExistentLogin_ShouldThrowEntityNotFoundException" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.001"/>
+  <testcase name="updateById_ShouldUpdateSpecificUser" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.004">
+    <system-out><![CDATA[2025-12-15T18:59:01.066+03:00  INFO 18976 --- [           main] c.k.e.service.impl.PersonServiceImpl     : Update person id: 2
+]]></system-out>
+  </testcase>
+  <testcase name="updatePersonRoleById_ShouldUpdatePersonRole" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.003"/>
+  <testcase name="findMe_ShouldReturnCurrentUserDto" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.002">
+    <system-out><![CDATA[2025-12-15T18:59:01.072+03:00  INFO 18976 --- [           main] c.k.e.service.impl.PersonServiceImpl     : Find me person
+]]></system-out>
+  </testcase>
+  <testcase name="updateImage_ForCurrentUser_WithIOException_ShouldThrowEntityNotFoundException" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.003"/>
+  <testcase name="update_ShouldSetIdFromJwt" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.003">
+    <system-out><![CDATA[2025-12-15T18:59:01.079+03:00  INFO 18976 --- [           main] c.k.e.service.impl.PersonServiceImpl     : Update person id: 999
+]]></system-out>
+  </testcase>
+  <testcase name="addGroupByName_ForCurrentUser_ShouldAddGroup" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.002"/>
+  <testcase name="update_ShouldUpdateCurrentUser" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.002">
+    <system-out><![CDATA[2025-12-15T18:59:01.083+03:00  INFO 18976 --- [           main] c.k.e.service.impl.PersonServiceImpl     : Update person id: null
+]]></system-out>
+  </testcase>
+  <testcase name="read_WithDeletedPerson_ShouldThrowEntityNotFoundException" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.003">
+    <system-out><![CDATA[2025-12-15T18:59:01.086+03:00  INFO 18976 --- [           main] c.k.e.service.impl.PersonServiceImpl     : Read person id: 1
+]]></system-out>
+  </testcase>
+  <testcase name="findMe_WhenUserNotFound_ShouldThrowEntityNotFoundException" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.004">
+    <system-out><![CDATA[2025-12-15T18:59:01.090+03:00  INFO 18976 --- [           main] c.k.e.service.impl.PersonServiceImpl     : Find me person
+]]></system-out>
+  </testcase>
+  <testcase name="findByLogin_ShouldReturnPerson" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.002"/>
+  <testcase name="deleteImage_ShouldRemoveImageFromCurrentUser" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.002"/>
+  <testcase name="setImageById_ShouldSetImageForCurrentUser" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.003"/>
+  <testcase name="getAllPersons_WhenNoPersons_ShouldThrowEntityNotFoundException" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.002">
+    <system-out><![CDATA[2025-12-15T18:59:01.100+03:00  INFO 18976 --- [           main] c.k.e.service.impl.PersonServiceImpl     : Read all persons
+]]></system-out>
+  </testcase>
+  <testcase name="delete_WithId_ShouldSoftDeletePerson" classname="com.kayles.employee_management_system.test.service.PersonServiceImplTest" time="0.004">
+    <system-out><![CDATA[2025-12-15T18:59:01.103+03:00  INFO 18976 --- [           main] c.k.e.service.impl.PersonServiceImpl     : Delete person id: 1
+]]></system-out>
+  </testcase>
 </testsuite>

@@ -44,7 +44,7 @@ public class AdminControllerImpl implements AdminController {
     @Override
     @PutMapping(&quot;/updateRole/{id}&quot;)
     public ResponseEntity&lt;PersonDto&gt; setRoleById(@PathVariable Long id, @RequestBody RoleDto roleDto) {
-<span class="fc" id="L47">        return ResponseEntity.ok(personService.updatePersonRoleById(id, roleDto));</span>
+<span class="nc" id="L47">        return ResponseEntity.ok(personService.updatePersonRoleById(id, roleDto));</span>
     }
 
     @Override

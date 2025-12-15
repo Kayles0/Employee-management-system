@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.155" tests="11" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.kayles.employee_management_system.test.controller.ImageControllerImplTest" time="0.079" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -66,15 +66,24 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="extractLogin_WithEmptyToken_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.099"/>
-  <testcase name="isTokenValid_WithValidTokenAndMatchingUserDetails_ReturnsTrue" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.019"/>
-  <testcase name="isTokenValid_WithMalformedToken_ReturnsFalseOrThrows" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.003"/>
-  <testcase name="extractLogin_WithTamperedToken_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.003"/>
-  <testcase name="extractLogin_WithNullToken_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.002"/>
-  <testcase name="isTokenValid_WithValidTokenAndNonMatchingUserDetails_ReturnsFalse" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.003"/>
-  <testcase name="extractLogin_WithValidToken_ReturnsUsername" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.002"/>
-  <testcase name="generateToken_WithValidJwtPerson_ReturnsValidToken" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.009"/>
-  <testcase name="extractLogin_WithInvalidTokenFormat_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.003"/>
-  <testcase name="extractAllClaims_WithInvalidBase64_ThrowsException" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.001"/>
-  <testcase name="isTokenExpired_WithExpiredToken_ReturnsFalse" classname="com.kayles.employee_management_system.test.service.JwtServiceTest" time="0.005"/>
+  <testcase name="testCreateImageFromFile_ShouldReturnImageDto" classname="com.kayles.employee_management_system.test.controller.ImageControllerImplTest" time="0.034">
+    <system-out><![CDATA[2025-12-15T18:58:59.374+03:00  INFO 18976 --- [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2025-12-15T18:58:59.374+03:00  INFO 18976 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-12-15T18:58:59.374+03:00  INFO 18976 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-12-15T18:58:59.377+03:00  INFO 18976 --- [           main] c.k.e.c.impl.ImageControllerImpl         : Create image from file
+]]></system-out>
+  </testcase>
+  <testcase name="testCreateImageFromDto_ShouldReturnImageDto" classname="com.kayles.employee_management_system.test.controller.ImageControllerImplTest" time="0.025">
+    <system-out><![CDATA[2025-12-15T18:58:59.404+03:00  INFO 18976 --- [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2025-12-15T18:58:59.405+03:00  INFO 18976 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-12-15T18:58:59.405+03:00  INFO 18976 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-12-15T18:58:59.417+03:00  INFO 18976 --- [           main] c.k.e.c.impl.ImageControllerImpl         : Create image from dto
+]]></system-out>
+  </testcase>
+  <testcase name="testReadImageById_ShouldReturnImageBytes" classname="com.kayles.employee_management_system.test.controller.ImageControllerImplTest" time="0.016">
+    <system-out><![CDATA[2025-12-15T18:58:59.429+03:00  INFO 18976 --- [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2025-12-15T18:58:59.429+03:00  INFO 18976 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-12-15T18:58:59.430+03:00  INFO 18976 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+]]></system-out>
+  </testcase>
 </testsuite>

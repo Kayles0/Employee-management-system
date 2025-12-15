@@ -26,44 +26,44 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public GroupDto[] readAllGroups() {
-<span class="nc" id="L29">        List&lt;Group&gt; groups = groupRepository.findAllWithPersons();</span>
-<span class="nc" id="L30">        return groups.stream()</span>
-<span class="nc" id="L31">                .map(groupMapper::toDto)</span>
-<span class="nc" id="L32">                .toArray(GroupDto[]::new);</span>
+<span class="fc" id="L29">        List&lt;Group&gt; groups = groupRepository.findAllWithPersons();</span>
+<span class="fc" id="L30">        return groups.stream()</span>
+<span class="fc" id="L31">                .map(groupMapper::toDto)</span>
+<span class="fc" id="L32">                .toArray(GroupDto[]::new);</span>
     }
 
     @Override
     public GroupDto createGroup(GroupDto groupDto) {
-<span class="nc" id="L37">        Group group = Group.builder()</span>
-<span class="nc" id="L38">                .name(groupDto.getName())</span>
-<span class="nc" id="L39">                .isDeleted(false)</span>
-<span class="nc" id="L40">                .persons(new ArrayList&lt;&gt;())</span>
-<span class="nc" id="L41">                .build();</span>
-<span class="nc" id="L42">        group = groupRepository.save(group);</span>
-<span class="nc" id="L43">        return groupMapper.toDto(group);</span>
+<span class="fc" id="L37">        Group group = Group.builder()</span>
+<span class="fc" id="L38">                .name(groupDto.getName())</span>
+<span class="fc" id="L39">                .isDeleted(false)</span>
+<span class="fc" id="L40">                .persons(new ArrayList&lt;&gt;())</span>
+<span class="fc" id="L41">                .build();</span>
+<span class="fc" id="L42">        group = groupRepository.save(group);</span>
+<span class="fc" id="L43">        return groupMapper.toDto(group);</span>
     }
 
 
 
     @Override
     public GroupDto findById(Long id) {
-<span class="nc" id="L50">        return groupMapper.toDto(groupRepository.findById(id)</span>
-<span class="nc" id="L51">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Group not found&quot;)));</span>
+<span class="fc" id="L50">        return groupMapper.toDto(groupRepository.findById(id)</span>
+<span class="fc" id="L51">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Group not found&quot;)));</span>
     }
 
     @Override
     public void addToGroupById(Long id, Long personId) {
-<span class="nc" id="L56">        Group group = groupRepository.findById(id)</span>
-<span class="nc" id="L57">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Group not found&quot;));</span>
-<span class="nc" id="L58">        Person person = personRepository.findPersonByIdAndIsNotDeleted(personId)</span>
-<span class="nc" id="L59">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Person not found&quot;));</span>
-<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (!group.getPersons().contains(person)) {</span>
-<span class="nc" id="L61">            group.getPersons().add(person);</span>
-<span class="nc" id="L62">            groupRepository.save(group);</span>
-<span class="nc" id="L63">            person.getGroupList().add(group);</span>
-<span class="nc" id="L64">            personRepository.save(person);</span>
+<span class="fc" id="L56">        Group group = groupRepository.findById(id)</span>
+<span class="fc" id="L57">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Group not found&quot;));</span>
+<span class="fc" id="L58">        Person person = personRepository.findPersonByIdAndIsNotDeleted(personId)</span>
+<span class="fc" id="L59">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Person not found&quot;));</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (!group.getPersons().contains(person)) {</span>
+<span class="fc" id="L61">            group.getPersons().add(person);</span>
+<span class="fc" id="L62">            groupRepository.save(group);</span>
+<span class="fc" id="L63">            person.getGroupList().add(group);</span>
+<span class="fc" id="L64">            personRepository.save(person);</span>
         }
-<span class="nc" id="L66">    }</span>
+<span class="fc" id="L66">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

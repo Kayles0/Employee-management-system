@@ -24,59 +24,59 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public ImageDto createFromFile(MultipartFile imageFile) {
         try {
-<span class="nc" id="L27">            Image image = Image.builder()</span>
-<span class="nc" id="L28">                    .image(imageFile.getBytes())</span>
-<span class="nc" id="L29">                    .isDeleted(false)</span>
-<span class="nc" id="L30">                    .build();</span>
-<span class="nc" id="L31">            image = imageRepository.save(image);</span>
-<span class="nc" id="L32">            return imageMapper.toDto(image);</span>
-<span class="nc" id="L33">        } catch (IOException e){</span>
-<span class="nc" id="L34">            throw new RuntimeException(&quot;Error creating image&quot;, e);</span>
+<span class="fc" id="L27">            Image image = Image.builder()</span>
+<span class="fc" id="L28">                    .image(imageFile.getBytes())</span>
+<span class="fc" id="L29">                    .isDeleted(false)</span>
+<span class="fc" id="L30">                    .build();</span>
+<span class="fc" id="L31">            image = imageRepository.save(image);</span>
+<span class="fc" id="L32">            return imageMapper.toDto(image);</span>
+<span class="fc" id="L33">        } catch (IOException e){</span>
+<span class="fc" id="L34">            throw new RuntimeException(&quot;Error creating image&quot;, e);</span>
         }
     }
 
     @Override
     public ImageDto createFromDto(ImageDto dto) {
-<span class="nc" id="L40">        Image image = imageMapper.toEntity(dto);</span>
-<span class="nc" id="L41">        imageRepository.save(image);</span>
-<span class="nc" id="L42">        return imageMapper.toDto(image);</span>
+<span class="fc" id="L40">        Image image = imageMapper.toEntity(dto);</span>
+<span class="fc" id="L41">        imageRepository.save(image);</span>
+<span class="fc" id="L42">        return imageMapper.toDto(image);</span>
     }
 
     @Override
     public ImageDto read(Long id) {
-<span class="nc" id="L47">        Image image = imageRepository.findByIdAndIsNotDeleted(id)</span>
-<span class="nc" id="L48">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Image not found with id {}&quot;, id));</span>
-<span class="nc" id="L49">        return imageMapper.toDto(image);</span>
+<span class="fc" id="L47">        Image image = imageRepository.findByIdAndIsNotDeleted(id)</span>
+<span class="fc" id="L48">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Image not found with id {}&quot;, id));</span>
+<span class="fc" id="L49">        return imageMapper.toDto(image);</span>
     }
 
     @Override
     public ImageDto recreate(Long id, MultipartFile imageFile) {
-<span class="nc" id="L54">        Image image = imageRepository</span>
-<span class="nc" id="L55">                .findById(id)</span>
-<span class="nc" id="L56">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Image not found with id {}&quot;, id));</span>
+<span class="fc" id="L54">        Image image = imageRepository</span>
+<span class="fc" id="L55">                .findById(id)</span>
+<span class="fc" id="L56">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Image not found with id {}&quot;, id));</span>
         try {
-<span class="nc" id="L58">            image.setImage(imageFile.getBytes());</span>
-<span class="nc" id="L59">            imageRepository.save(image);</span>
-<span class="nc" id="L60">        } catch (IOException e) {</span>
-<span class="nc" id="L61">            throw new RuntimeException(&quot;Error recreating image&quot;, e);</span>
-<span class="nc" id="L62">        }</span>
-<span class="nc" id="L63">        return imageMapper.toDto(image);</span>
+<span class="fc" id="L58">            image.setImage(imageFile.getBytes());</span>
+<span class="fc" id="L59">            imageRepository.save(image);</span>
+<span class="fc" id="L60">        } catch (IOException e) {</span>
+<span class="fc" id="L61">            throw new RuntimeException(&quot;Error recreating image&quot;, e);</span>
+<span class="fc" id="L62">        }</span>
+<span class="fc" id="L63">        return imageMapper.toDto(image);</span>
     }
 
     @Override
     public void update(ImageDto dto) {
-<span class="nc" id="L68">        Image exImage = imageRepository.findById(dto.getId()).orElseThrow(() -&gt; new EntityNotFoundException(&quot;Image not found with id {}&quot;, dto.getId()));</span>
-<span class="nc" id="L69">        Image newImage = imageMapper.toEntity(dto);</span>
-<span class="nc" id="L70">        imageMapper.updateImage(exImage, newImage);</span>
-<span class="nc" id="L71">        imageRepository.save(exImage);</span>
-<span class="nc" id="L72">    }</span>
+<span class="fc" id="L68">        Image exImage = imageRepository.findById(dto.getId()).orElseThrow(() -&gt; new EntityNotFoundException(&quot;Image not found with id {}&quot;, dto.getId()));</span>
+<span class="fc" id="L69">        Image newImage = imageMapper.toEntity(dto);</span>
+<span class="fc" id="L70">        imageMapper.updateImage(exImage, newImage);</span>
+<span class="fc" id="L71">        imageRepository.save(exImage);</span>
+<span class="fc" id="L72">    }</span>
 
     @Override
     public void delete(Long id) {
-<span class="nc" id="L76">        Image image = imageRepository.findById(id).orElseThrow(() -&gt; new EntityNotFoundException(&quot;Image not found with id {}&quot;, id));</span>
-<span class="nc" id="L77">        image.setIsDeleted(true);</span>
-<span class="nc" id="L78">        imageRepository.save(image);</span>
-<span class="nc" id="L79">    }</span>
+<span class="fc" id="L76">        Image image = imageRepository.findById(id).orElseThrow(() -&gt; new EntityNotFoundException(&quot;Image not found with id {}&quot;, id));</span>
+<span class="fc" id="L77">        image.setIsDeleted(true);</span>
+<span class="fc" id="L78">        imageRepository.save(image);</span>
+<span class="fc" id="L79">    }</span>
 
 
 

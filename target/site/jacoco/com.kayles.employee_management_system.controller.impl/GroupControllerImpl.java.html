@@ -22,30 +22,30 @@ public class GroupControllerImpl implements GroupController {
     @Override
     @GetMapping(&quot;/all&quot;)
     public ResponseEntity&lt;GroupDto[]&gt; groupList() {
-<span class="nc" id="L25">        return ResponseEntity.ok(groupService.readAllGroups());</span>
+<span class="fc" id="L25">        return ResponseEntity.ok(groupService.readAllGroups());</span>
     }
 
     @Override
     @PutMapping()
     public ResponseEntity&lt;GroupDto&gt; createGroup(@RequestBody GroupDto groupDto) {
-<span class="nc" id="L31">        logger.info(&quot;Create Group&quot;);</span>
-<span class="nc" id="L32">        return ResponseEntity.ok(groupService.createGroup(groupDto));</span>
+<span class="fc" id="L31">        logger.info(&quot;Create Group&quot;);</span>
+<span class="fc" id="L32">        return ResponseEntity.ok(groupService.createGroup(groupDto));</span>
     }
 
     @Override
     @GetMapping(&quot;/{id}&quot;)
     public ResponseEntity&lt;GroupDto&gt; findGroupById(@PathVariable Long id) {
-<span class="nc" id="L38">        logger.info(&quot;Find Group by ID {}&quot;, id);</span>
-<span class="nc" id="L39">        return ResponseEntity.ok(groupService.findById(id));</span>
+<span class="fc" id="L38">        logger.info(&quot;Find Group by ID {}&quot;, id);</span>
+<span class="fc" id="L39">        return ResponseEntity.ok(groupService.findById(id));</span>
     }
 
     @Override
     @GetMapping(&quot;/addMe/{groupId}&quot;)
     public ResponseEntity&lt;Void&gt; addMeToGroupById(@PathVariable Long groupId) {
-<span class="nc" id="L45">        Long userId = personService.findMe().getId();</span>
-<span class="nc" id="L46">        logger.info(&quot;Add me (id: {}) to Group by ID {}&quot;, userId, groupId);</span>
-<span class="nc" id="L47">        groupService.addToGroupById(groupId, userId);</span>
-<span class="nc" id="L48">        return ResponseEntity.ok().build();</span>
+<span class="fc" id="L45">        Long userId = personService.findMe().getId();</span>
+<span class="fc" id="L46">        logger.info(&quot;Add me (id: {}) to Group by ID {}&quot;, userId, groupId);</span>
+<span class="fc" id="L47">        groupService.addToGroupById(groupId, userId);</span>
+<span class="fc" id="L48">        return ResponseEntity.ok().build();</span>
     }
 }
 
