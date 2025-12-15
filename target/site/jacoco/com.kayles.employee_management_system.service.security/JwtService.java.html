@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JwtService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">employee_management_system</a> &gt; <a href="index.source.html" class="el_package">com.kayles.employee_management_system.service.security</a> &gt; <span class="el_source">JwtService.java</span></div><h1>JwtService.java</h1><pre class="source lang-java linenums">package com.kayles.employee_management_system.service.security;
+
+
+import com.kayles.employee_management_system.dto.security.JwtPerson;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.Date;
+import java.util.function.Function;
+
+@Service
+<span class="fc" id="L19">public class JwtService {</span>
+    @Value(&quot;${jwt.secret}&quot;)
+    private String SECRET_KEY;
+<span class="fc" id="L22">    private static final Long TOKEN_VALIDITY = (long) (1000 * 60 * 60);</span>
+
+    private static final String PROFILE_ROLES = &quot;authorities&quot;;
+    private static final String PROFILE_LOGIN = &quot;login&quot;;
+    private static final String PROFILE_ID = &quot;id&quot;;
+
+    public Claims extractAllClaims(String token) {
+<span class="fc" id="L29">        return Jwts.parser()</span>
+<span class="fc" id="L30">                .verifyWith(getSignKey())</span>
+<span class="fc" id="L31">                .build()</span>
+<span class="fc" id="L32">                .parseSignedClaims(token)</span>
+<span class="fc" id="L33">                .getPayload();</span>
+    }
+
+    public &lt;T&gt; T extractClaims(String token, Function&lt;Claims, T&gt; claimsResolver) {
+<span class="fc" id="L37">        final Claims claims = extractAllClaims(token);</span>
+<span class="fc" id="L38">        return claimsResolver.apply(claims);</span>
+    }
+
+    public String extractLogin(String token) {
+<span class="fc" id="L42">        return extractClaims(token, Claims::getSubject);</span>
+    }
+
+    private SecretKey getSignKey(){
+<span class="fc" id="L46">        byte[] keyBytes = Base64.getDecoder()</span>
+<span class="fc" id="L47">                .decode(SECRET_KEY.getBytes(StandardCharsets.UTF_8));</span>
+<span class="fc" id="L48">        return new SecretKeySpec(keyBytes, &quot;HmacSHA256&quot;);</span>
+    }
+
+    public String generateToken(JwtPerson jwtPerson) {
+<span class="fc" id="L52">        return Jwts.builder()</span>
+<span class="fc" id="L53">                .subject(jwtPerson.getUsername())</span>
+<span class="fc" id="L54">                .issuedAt(new Date(System.currentTimeMillis()))</span>
+<span class="fc" id="L55">                .expiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY))</span>
+<span class="fc" id="L56">                .signWith(getSignKey())</span>
+<span class="fc" id="L57">                .claim(PROFILE_ID, jwtPerson.getId())</span>
+<span class="fc" id="L58">                .claim(PROFILE_LOGIN, jwtPerson.getLogin())</span>
+<span class="fc" id="L59">                .claim(PROFILE_ROLES, jwtPerson.getAuthorities())</span>
+<span class="fc" id="L60">                .compact();</span>
+    }
+
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+<span class="fc" id="L64">        final String login = extractLogin(token);</span>
+<span class="pc bpc" id="L65" title="1 of 4 branches missed.">        return (login.equals(userDetails.getUsername())) &amp;&amp; !isTokenExpired(token);</span>
+    }
+
+    public boolean isTokenExpired(String token) {
+<span class="fc" id="L69">        return extractExpiration(token).before(new Date(System.currentTimeMillis()));</span>
+    }
+
+    public Date extractExpiration(String token) {
+<span class="fc" id="L73">        return extractClaims(token, Claims::getExpiration);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

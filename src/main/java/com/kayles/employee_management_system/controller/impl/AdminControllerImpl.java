@@ -1,13 +1,10 @@
 package com.kayles.employee_management_system.controller.impl;
 
-import com.kayles.employee_management_system.Service.ImageService;
-import com.kayles.employee_management_system.Service.PersonService;
+import com.kayles.employee_management_system.service.ImageService;
+import com.kayles.employee_management_system.service.PersonService;
 import com.kayles.employee_management_system.controller.AdminController;
 import com.kayles.employee_management_system.dto.PersonDto;
 import com.kayles.employee_management_system.dto.RoleDto;
-import com.kayles.employee_management_system.entity.Image;
-import com.kayles.employee_management_system.entity.Person;
-import com.kayles.employee_management_system.exception.EntityNotFoundException;
 import com.kayles.employee_management_system.repository.ImageRepository;
 import com.kayles.employee_management_system.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor

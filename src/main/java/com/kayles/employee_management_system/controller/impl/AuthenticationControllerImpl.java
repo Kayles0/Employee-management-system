@@ -1,6 +1,6 @@
 package com.kayles.employee_management_system.controller.impl;
 
-import com.kayles.employee_management_system.Service.security.AuthenticationService;
+import com.kayles.employee_management_system.service.security.AuthenticationService;
 import com.kayles.employee_management_system.controller.AuthenticationController;
 import com.kayles.employee_management_system.dto.security.AuthenticationRequest;
 import com.kayles.employee_management_system.dto.security.AuthenticationResponse;

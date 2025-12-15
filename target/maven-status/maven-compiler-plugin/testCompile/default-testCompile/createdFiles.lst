@@ -1,1 +1,8 @@
+com\kayles\employee_management_system\test\controller\PersonControllerImplTest.class
+com\kayles\employee_management_system\test\service\JwtServiceTest.class
+com\kayles\employee_management_system\test\service\AuthenticationServiceTest.class
+com\kayles\employee_management_system\test\controller\AdminControllerImplTest.class
+com\kayles\employee_management_system\test\controller\AuthenticationControllerTest.class
+com\kayles\employee_management_system\integrationTest\AuthenticationControllerIntegrationTest.class
 com\kayles\employee_management_system\EmployeeManagementSystemApplicationTests.class
+com\kayles\employee_management_system\TestJwtUtil.class

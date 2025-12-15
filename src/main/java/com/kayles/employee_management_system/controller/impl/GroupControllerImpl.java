@@ -1,7 +1,7 @@
 package com.kayles.employee_management_system.controller.impl;
 
-import com.kayles.employee_management_system.Service.GroupService;
-import com.kayles.employee_management_system.Service.PersonService;
+import com.kayles.employee_management_system.service.GroupService;
+import com.kayles.employee_management_system.service.PersonService;
 import com.kayles.employee_management_system.controller.GroupController;
 import com.kayles.employee_management_system.dto.GroupDto;
 import lombok.RequiredArgsConstructor;

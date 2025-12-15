@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GroupServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">employee_management_system</a> &gt; <a href="index.source.html" class="el_package">com.kayles.employee_management_system.service.impl</a> &gt; <span class="el_source">GroupServiceImpl.java</span></div><h1>GroupServiceImpl.java</h1><pre class="source lang-java linenums">package com.kayles.employee_management_system.service.impl;
+
+import com.kayles.employee_management_system.service.GroupService;
+import com.kayles.employee_management_system.dto.GroupDto;
+import com.kayles.employee_management_system.entity.Group;
+import com.kayles.employee_management_system.entity.Person;
+import com.kayles.employee_management_system.exception.EntityNotFoundException;
+import com.kayles.employee_management_system.mapper.GroupMapper;
+import com.kayles.employee_management_system.repository.GroupRepository;
+import com.kayles.employee_management_system.repository.PersonRepository;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class GroupServiceImpl implements GroupService {
+
+    private final GroupMapper groupMapper;
+    private final GroupRepository groupRepository;
+    private final PersonRepository personRepository;
+
+    @Override
+    public GroupDto[] readAllGroups() {
+<span class="nc" id="L29">        List&lt;Group&gt; groups = groupRepository.findAllWithPersons();</span>
+<span class="nc" id="L30">        return groups.stream()</span>
+<span class="nc" id="L31">                .map(groupMapper::toDto)</span>
+<span class="nc" id="L32">                .toArray(GroupDto[]::new);</span>
+    }
+
+    @Override
+    public GroupDto createGroup(GroupDto groupDto) {
+<span class="nc" id="L37">        Group group = Group.builder()</span>
+<span class="nc" id="L38">                .name(groupDto.getName())</span>
+<span class="nc" id="L39">                .isDeleted(false)</span>
+<span class="nc" id="L40">                .persons(new ArrayList&lt;&gt;())</span>
+<span class="nc" id="L41">                .build();</span>
+<span class="nc" id="L42">        group = groupRepository.save(group);</span>
+<span class="nc" id="L43">        return groupMapper.toDto(group);</span>
+    }
+
+
+
+    @Override
+    public GroupDto findById(Long id) {
+<span class="nc" id="L50">        return groupMapper.toDto(groupRepository.findById(id)</span>
+<span class="nc" id="L51">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Group not found&quot;)));</span>
+    }
+
+    @Override
+    public void addToGroupById(Long id, Long personId) {
+<span class="nc" id="L56">        Group group = groupRepository.findById(id)</span>
+<span class="nc" id="L57">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Group not found&quot;));</span>
+<span class="nc" id="L58">        Person person = personRepository.findPersonByIdAndIsNotDeleted(personId)</span>
+<span class="nc" id="L59">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Person not found&quot;));</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (!group.getPersons().contains(person)) {</span>
+<span class="nc" id="L61">            group.getPersons().add(person);</span>
+<span class="nc" id="L62">            groupRepository.save(group);</span>
+<span class="nc" id="L63">            person.getGroupList().add(group);</span>
+<span class="nc" id="L64">            personRepository.save(person);</span>
+        }
+<span class="nc" id="L66">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

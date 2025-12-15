@@ -1,7 +1,7 @@
 package com.kayles.employee_management_system.security;
 
-import com.kayles.employee_management_system.Service.security.JwtService;
-import com.kayles.employee_management_system.Service.security.PersonDetailService;
+import com.kayles.employee_management_system.service.security.JwtService;
+import com.kayles.employee_management_system.service.security.PersonDetailService;
 import com.kayles.employee_management_system.dto.security.JwtPerson;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
