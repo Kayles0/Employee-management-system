@@ -1,4 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: com.kayles.employee_management_system.test.controller.AdminControllerImplTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.292 s -- in com.kayles.employee_management_system.test.controller.AdminControllerImplTest
+Tests run: 5, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.358 s <<< FAILURE! -- in com.kayles.employee_management_system.test.controller.AdminControllerImplTest
+com.kayles.employee_management_system.test.controller.AdminControllerImplTest.testSetRoleById_WithInvalidRole_ShouldReturnBadRequest -- Time elapsed: 0.027 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<400> but was:<200>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:61)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:128)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:640)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.kayles.employee_management_system.test.controller.AdminControllerImplTest.testSetRoleById_WithInvalidRole_ShouldReturnBadRequest(AdminControllerImplTest.java:121)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+

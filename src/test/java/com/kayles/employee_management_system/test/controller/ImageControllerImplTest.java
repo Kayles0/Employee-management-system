@@ -108,6 +108,7 @@ class ImageControllerImplTest {
     }
 
     //todo not good что можно передать ничего, что будет занимать место в БД
+    @Test
     void testCreateImageFromDto_WithInvalidData_ShouldReturnBadRequest() throws Exception {
         // Given - пустой DTO
         ImageDto emptyDto = ImageDto.builder().build();
@@ -122,6 +123,7 @@ class ImageControllerImplTest {
     }
 
     //TODO нет обработчика ошибок если изображения не существует
+    @Test
     void testReadImageById_WithNonExistingId_ShouldReturnNotFound() throws Exception {
         // Given
         Long nonExistingId = 999L;

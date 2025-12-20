@@ -167,6 +167,7 @@ class GroupServiceImplTest {
     }
 
     //TODO НАЙДЕНА ОШИБКА
+    @Test
     void createGroup_WithNullName_ShouldThrowException() {
         // Arrange
         GroupDto inputDto = GroupDto.builder()

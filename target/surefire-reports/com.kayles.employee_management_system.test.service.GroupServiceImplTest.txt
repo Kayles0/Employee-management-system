@@ -1,4 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: com.kayles.employee_management_system.test.service.GroupServiceImplTest
 -------------------------------------------------------------------------------
-Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.203 s -- in com.kayles.employee_management_system.test.service.GroupServiceImplTest
+Tests run: 21, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.187 s <<< FAILURE! -- in com.kayles.employee_management_system.test.service.GroupServiceImplTest
+com.kayles.employee_management_system.test.service.GroupServiceImplTest.createGroup_WithNullName_ShouldThrowException -- Time elapsed: 0.006 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.NullPointerException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+	at com.kayles.employee_management_system.test.service.GroupServiceImplTest.createGroup_WithNullName_ShouldThrowException(GroupServiceImplTest.java:179)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+

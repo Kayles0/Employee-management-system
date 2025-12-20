@@ -212,7 +212,9 @@
 				<configuration>
 					<includes>
 						<include>**/controller/**</include>
-						<include>**/service/impl/**</include>
+						<include>**/service/impl/PersonServiceImpl*</include>
+						<include>**/service/impl/ImageServiceImpl*</include>
+						<include>**/service/impl/GroupServiceImpl*</include>
 						<include>**/AuthenticationService*</include>
 						<include>**/service/security/JwtService*</include>
 					</includes>

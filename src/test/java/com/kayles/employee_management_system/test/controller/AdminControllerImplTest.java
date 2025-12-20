@@ -107,7 +107,7 @@ class AdminControllerImplTest {
     }
 
     //TODO найденая ошибка
-//    @Test
+    @Test
     void testSetRoleById_WithInvalidRole_ShouldReturnBadRequest() throws Exception {
         // Given
         Long personId = 1L;
